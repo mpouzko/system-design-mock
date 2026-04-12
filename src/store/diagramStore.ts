@@ -8,7 +8,7 @@ import {
   type OnConnect,
   type Connection,
 } from '@xyflow/react';
-import type { DiagramNode, DiagramEdge, Diagram } from '../types';
+import type { DiagramNode, DiagramEdge, Diagram, ConfigEntry } from '../types';
 import { saveDiagram, loadDiagram, listDiagrams, deleteDiagram as removeDiagram } from '../utils/storage';
 
 type DiagramState = {
@@ -25,6 +25,7 @@ type DiagramState = {
   addNode: (node: DiagramNode) => void;
   updateNodeLabel: (nodeId: string, label: string) => void;
   updateEdgeLabel: (edgeId: string, label: string) => void;
+  updateNodeConfig: (nodeId: string, configText: string, configEntries: ConfigEntry[]) => void;
   deleteSelected: () => void;
 
   setDiagramName: (name: string) => void;
@@ -80,6 +81,14 @@ export const useDiagramStore = create<DiagramState>((set, get) => ({
     set({
       edges: get().edges.map((e) =>
         e.id === edgeId ? { ...e, data: { ...e.data, label } } : e
+      ),
+    });
+  },
+
+  updateNodeConfig: (nodeId, configText, configEntries) => {
+    set({
+      nodes: get().nodes.map((n) =>
+        n.id === nodeId ? { ...n, data: { ...n.data, configText, configEntries } } : n
       ),
     });
   },

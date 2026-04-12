@@ -9,8 +9,12 @@ export type DiagramNodeType =
   | 'cloud'
   | 'cache';
 
+export type ConfigEntry = { key: string; value: string; children?: ConfigEntry[] };
+
 export type DiagramNodeData = {
   label: string;
+  configText?: string;
+  configEntries?: ConfigEntry[];
 };
 
 export type DiagramNode = Node<DiagramNodeData, DiagramNodeType>;
