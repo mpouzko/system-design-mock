@@ -36,14 +36,31 @@ export function CustomEdge({
     if (editing) inputRef.current?.focus();
   }, [editing]);
 
+  const markerId = `arrowhead-${id}`;
+  const color = selected ? '#3b82f6' : '#94a3b8';
+
   return (
     <>
+      <defs>
+        <marker
+          id={markerId}
+          markerWidth="12"
+          markerHeight="12"
+          refX="10"
+          refY="6"
+          orient="auto"
+          markerUnits="userSpaceOnUse"
+        >
+          <path d="M2,2 L10,6 L2,10" fill="none" stroke={color} strokeWidth="1.5" />
+        </marker>
+      </defs>
       <BaseEdge
         id={id}
         path={edgePath}
         style={{
-          stroke: selected ? '#3b82f6' : '#94a3b8',
+          stroke: color,
           strokeWidth: selected ? 2.5 : 1.5,
+          markerEnd: `url(#${markerId})`,
         }}
       />
       <EdgeLabelRenderer>

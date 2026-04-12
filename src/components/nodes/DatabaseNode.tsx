@@ -14,11 +14,11 @@ export function DatabaseNode({ id, data, selected }: NodeProps<DiagramNode>) {
 
   return (
     <div
-      className={`relative min-w-[110px] text-center ${selected ? 'drop-shadow-md' : 'drop-shadow-sm'}`}
+      className={`relative w-[120px] text-center ${selected ? 'drop-shadow-md' : 'drop-shadow-sm'}`}
       onDoubleClick={() => setEditing(true)}
     >
-      <Handle type="target" position={Position.Top} className="!bg-green-500 !w-2.5 !h-2.5 !top-1" />
-      <Handle type="target" position={Position.Left} className="!bg-green-500 !w-2.5 !h-2.5" />
+      <Handle type="source" id="top" position={Position.Top} className="!bg-green-500 !w-4 !h-4 !top-1" />
+      <Handle type="source" id="left" position={Position.Left} className="!bg-green-500 !w-4 !h-4" />
 
       <svg viewBox="0 0 120 80" className="w-full h-auto" xmlns="http://www.w3.org/2000/svg">
         <ellipse cx="60" cy="16" rx="55" ry="14"
@@ -44,8 +44,8 @@ export function DatabaseNode({ id, data, selected }: NodeProps<DiagramNode>) {
         )}
       </div>
 
-      <Handle type="source" position={Position.Bottom} className="!bg-green-500 !w-2.5 !h-2.5 !bottom-1" />
-      <Handle type="source" position={Position.Right} className="!bg-green-500 !w-2.5 !h-2.5" />
+      <Handle type="source" id="bottom" position={Position.Bottom} className="!bg-green-500 !w-4 !h-4 !bottom-1" />
+      <Handle type="source" id="right" position={Position.Right} className="!bg-green-500 !w-4 !h-4" />
     </div>
   );
 }

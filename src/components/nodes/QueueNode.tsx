@@ -14,11 +14,11 @@ export function QueueNode({ id, data, selected }: NodeProps<DiagramNode>) {
 
   return (
     <div
-      className={`relative min-w-[130px] text-center ${selected ? 'drop-shadow-md' : 'drop-shadow-sm'}`}
+      className={`relative w-[120px] text-center ${selected ? 'drop-shadow-md' : 'drop-shadow-sm'}`}
       onDoubleClick={() => setEditing(true)}
     >
-      <Handle type="target" position={Position.Top} className="!bg-orange-400 !w-2.5 !h-2.5" />
-      <Handle type="target" position={Position.Left} className="!bg-orange-400 !w-2.5 !h-2.5" />
+      <Handle type="source" id="top" position={Position.Top} className="!bg-orange-400 !w-4 !h-4" />
+      <Handle type="source" id="left" position={Position.Left} className="!bg-orange-400 !w-4 !h-4" />
 
       <svg viewBox="0 0 140 50" className="w-full h-auto" xmlns="http://www.w3.org/2000/svg">
         <path d="M15 2 L125 2 L135 25 L125 48 L15 48 L25 25 Z"
@@ -40,8 +40,8 @@ export function QueueNode({ id, data, selected }: NodeProps<DiagramNode>) {
         )}
       </div>
 
-      <Handle type="source" position={Position.Bottom} className="!bg-orange-400 !w-2.5 !h-2.5" />
-      <Handle type="source" position={Position.Right} className="!bg-orange-400 !w-2.5 !h-2.5" />
+      <Handle type="source" id="bottom" position={Position.Bottom} className="!bg-orange-400 !w-4 !h-4" />
+      <Handle type="source" id="right" position={Position.Right} className="!bg-orange-400 !w-4 !h-4" />
     </div>
   );
 }

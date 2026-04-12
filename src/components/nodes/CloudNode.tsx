@@ -14,11 +14,11 @@ export function CloudNode({ id, data, selected }: NodeProps<DiagramNode>) {
 
   return (
     <div
-      className={`relative min-w-[130px] text-center ${selected ? 'drop-shadow-md' : 'drop-shadow-sm'}`}
+      className={`relative w-[120px] text-center ${selected ? 'drop-shadow-md' : 'drop-shadow-sm'}`}
       onDoubleClick={() => setEditing(true)}
     >
-      <Handle type="target" position={Position.Top} className="!bg-sky-400 !w-2.5 !h-2.5" />
-      <Handle type="target" position={Position.Left} className="!bg-sky-400 !w-2.5 !h-2.5" />
+      <Handle type="source" id="top" position={Position.Top} className="!bg-sky-400 !w-4 !h-4" />
+      <Handle type="source" id="left" position={Position.Left} className="!bg-sky-400 !w-4 !h-4" />
 
       <svg viewBox="0 0 140 80" className="w-full h-auto" xmlns="http://www.w3.org/2000/svg">
         <path d="M30 65 C10 65 5 50 15 40 C5 25 20 10 40 15 C50 0 80 0 90 15 C110 5 135 15 130 35 C145 45 135 65 115 65 Z"
@@ -40,8 +40,8 @@ export function CloudNode({ id, data, selected }: NodeProps<DiagramNode>) {
         )}
       </div>
 
-      <Handle type="source" position={Position.Bottom} className="!bg-sky-400 !w-2.5 !h-2.5" />
-      <Handle type="source" position={Position.Right} className="!bg-sky-400 !w-2.5 !h-2.5" />
+      <Handle type="source" id="bottom" position={Position.Bottom} className="!bg-sky-400 !w-4 !h-4" />
+      <Handle type="source" id="right" position={Position.Right} className="!bg-sky-400 !w-4 !h-4" />
     </div>
   );
 }

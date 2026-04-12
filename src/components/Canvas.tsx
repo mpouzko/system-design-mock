@@ -5,6 +5,7 @@ import {
   Controls,
   MiniMap,
   BackgroundVariant,
+  ConnectionMode,
   type ReactFlowInstance,
 } from '@xyflow/react';
 import { useDiagramStore } from '../store/diagramStore';
@@ -80,10 +81,11 @@ export function Canvas() {
         onDrop={onDrop}
         nodeTypes={nodeTypes}
         edgeTypes={edgeTypes}
+        connectionMode={ConnectionMode.Loose}
         defaultEdgeOptions={{ type: 'custom' }}
         snapToGrid
         snapGrid={[15, 15]}
-        fitView
+        defaultViewport={{ x: 0, y: 0, zoom: 0.75 }}
         deleteKeyCode="Delete"
         className="bg-white"
       >

@@ -14,11 +14,11 @@ export function UserNode({ id, data, selected }: NodeProps<DiagramNode>) {
 
   return (
     <div
-      className={`flex flex-col items-center min-w-[80px] text-center ${selected ? 'drop-shadow-md' : 'drop-shadow-sm'}`}
+      className={`flex flex-col items-center w-[120px] text-center ${selected ? 'drop-shadow-md' : 'drop-shadow-sm'}`}
       onDoubleClick={() => setEditing(true)}
     >
-      <Handle type="target" position={Position.Top} className="!bg-gray-400 !w-2.5 !h-2.5" />
-      <Handle type="target" position={Position.Left} className="!bg-gray-400 !w-2.5 !h-2.5" />
+      <Handle type="source" id="top" position={Position.Top} className="!bg-gray-400 !w-4 !h-4" />
+      <Handle type="source" id="left" position={Position.Left} className="!bg-gray-400 !w-4 !h-4" />
 
       <svg viewBox="0 0 60 70" className="w-14 h-auto" xmlns="http://www.w3.org/2000/svg">
         <circle cx="30" cy="18" r="14"
@@ -40,8 +40,8 @@ export function UserNode({ id, data, selected }: NodeProps<DiagramNode>) {
         <div className="text-xs font-medium text-gray-600 mt-1">{data.label}</div>
       )}
 
-      <Handle type="source" position={Position.Bottom} className="!bg-gray-400 !w-2.5 !h-2.5" />
-      <Handle type="source" position={Position.Right} className="!bg-gray-400 !w-2.5 !h-2.5" />
+      <Handle type="source" id="bottom" position={Position.Bottom} className="!bg-gray-400 !w-4 !h-4" />
+      <Handle type="source" id="right" position={Position.Right} className="!bg-gray-400 !w-4 !h-4" />
     </div>
   );
 }

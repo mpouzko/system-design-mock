@@ -14,12 +14,12 @@ export function CacheNode({ id, data, selected }: NodeProps<DiagramNode>) {
 
   return (
     <div
-      className={`px-5 py-3 rounded-xl border-2 border-dashed bg-white shadow-sm min-w-[120px] text-center
+      className={`px-5 py-3 rounded-xl border-2 border-dashed bg-white shadow-sm w-[120px] text-center
         ${selected ? 'border-red-500 shadow-md' : 'border-red-300'}`}
       onDoubleClick={() => setEditing(true)}
     >
-      <Handle type="target" position={Position.Top} className="!bg-red-400 !w-2.5 !h-2.5" />
-      <Handle type="target" position={Position.Left} className="!bg-red-400 !w-2.5 !h-2.5" />
+      <Handle type="source" id="top" position={Position.Top} className="!bg-red-400 !w-4 !h-4" />
+      <Handle type="source" id="left" position={Position.Left} className="!bg-red-400 !w-4 !h-4" />
 
       {editing ? (
         <input
@@ -34,8 +34,8 @@ export function CacheNode({ id, data, selected }: NodeProps<DiagramNode>) {
         <div className="text-sm font-medium text-gray-700">{data.label}</div>
       )}
 
-      <Handle type="source" position={Position.Bottom} className="!bg-red-400 !w-2.5 !h-2.5" />
-      <Handle type="source" position={Position.Right} className="!bg-red-400 !w-2.5 !h-2.5" />
+      <Handle type="source" id="bottom" position={Position.Bottom} className="!bg-red-400 !w-4 !h-4" />
+      <Handle type="source" id="right" position={Position.Right} className="!bg-red-400 !w-4 !h-4" />
     </div>
   );
 }

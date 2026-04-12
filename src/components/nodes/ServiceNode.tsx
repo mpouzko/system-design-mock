@@ -14,12 +14,12 @@ export function ServiceNode({ id, data, selected }: NodeProps<DiagramNode>) {
 
   return (
     <div
-      className={`px-5 py-3 rounded-lg border-2 bg-white shadow-sm min-w-[120px] text-center
+      className={`px-5 py-3 rounded-lg border-2 bg-white shadow-sm w-[120px] text-center
         ${selected ? 'border-blue-500 shadow-md' : 'border-blue-300'}`}
       onDoubleClick={() => setEditing(true)}
     >
-      <Handle type="target" position={Position.Top} className="!bg-blue-400 !w-2.5 !h-2.5" />
-      <Handle type="target" position={Position.Left} className="!bg-blue-400 !w-2.5 !h-2.5" />
+      <Handle type="source" id="top" position={Position.Top} className="!bg-blue-400 !w-4 !h-4" />
+      <Handle type="source" id="left" position={Position.Left} className="!bg-blue-400 !w-4 !h-4" />
 
       {editing ? (
         <input
@@ -34,8 +34,8 @@ export function ServiceNode({ id, data, selected }: NodeProps<DiagramNode>) {
         <div className="text-sm font-medium text-gray-700">{data.label}</div>
       )}
 
-      <Handle type="source" position={Position.Bottom} className="!bg-blue-400 !w-2.5 !h-2.5" />
-      <Handle type="source" position={Position.Right} className="!bg-blue-400 !w-2.5 !h-2.5" />
+      <Handle type="source" id="bottom" position={Position.Bottom} className="!bg-blue-400 !w-4 !h-4" />
+      <Handle type="source" id="right" position={Position.Right} className="!bg-blue-400 !w-4 !h-4" />
     </div>
   );
 }
