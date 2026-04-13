@@ -90,6 +90,17 @@ const userOptions: TechOption[] = [
   { id: 'cli', name: 'CLI', icon: <LetterIcon letter=">_" bg="#1E293B" /> },
 ];
 
+const environmentOptions: TechOption[] = [
+  { id: 'kubernetes', name: 'Kubernetes', icon: <CircleIcon letter="K8" bg="#326CE5" /> },
+  { id: 'docker', name: 'Docker', icon: <LetterIcon letter="Dk" bg="#2496ED" /> },
+  { id: 'linux', name: 'Linux', icon: <CircleIcon letter="Lx" bg="#FCC624" fg="#333" /> },
+  { id: 'terraform', name: 'Terraform', icon: <LetterIcon letter="Tf" bg="#7B42BC" /> },
+  { id: 'rancher', name: 'Rancher', icon: <LetterIcon letter="Rn" bg="#0075A8" /> },
+  { id: 'ecs', name: 'AWS ECS', icon: <LetterIcon letter="EC" bg="#FF9900" /> },
+  { id: 'nomad', name: 'Nomad', icon: <LetterIcon letter="Nm" bg="#00CA8E" /> },
+  { id: 'podman', name: 'Podman', icon: <CircleIcon letter="Pm" bg="#892CA0" /> },
+];
+
 export const techOptions: Record<DiagramNodeType, TechOption[]> = {
   service: serviceOptions,
   database: databaseOptions,
@@ -98,6 +109,7 @@ export const techOptions: Record<DiagramNodeType, TechOption[]> = {
   cache: cacheOptions,
   cloud: cloudOptions,
   user: userOptions,
+  environment: environmentOptions,
 };
 
 export function getTechOption(nodeType: DiagramNodeType, techId: string): TechOption | undefined {

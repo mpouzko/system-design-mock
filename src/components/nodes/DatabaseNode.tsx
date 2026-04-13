@@ -1,4 +1,4 @@
-import { Handle, Position, type NodeProps } from '@xyflow/react';
+import { Handle, Position, NodeResizer, type NodeProps } from '@xyflow/react';
 import type { DiagramNode } from '../../types';
 import { useDiagramStore } from '../../store/diagramStore';
 import { CogButton } from '../CogButton';
@@ -16,9 +16,10 @@ export function DatabaseNode({ id, data, selected }: NodeProps<DiagramNode>) {
 
   return (
     <div
-      className={`relative w-[120px] text-center ${selected ? 'drop-shadow-md' : 'drop-shadow-sm'}`}
+      className={`relative w-full h-full min-w-[80px] text-center ${selected ? 'drop-shadow-md' : 'drop-shadow-sm'}`}
       onDoubleClick={() => setEditing(true)}
     >
+      <NodeResizer minWidth={80} minHeight={40} isVisible={!!selected} lineClassName="!border-green-400" handleClassName="!bg-green-500 !w-2 !h-2 !border-white" />
       <Handle type="source" id="top" position={Position.Top} className="!bg-green-500 !w-4 !h-4 !top-1" />
       <CogButton nodeId={id} data={data} />
       <TechButton nodeId={id} data={data} nodeType="database" />

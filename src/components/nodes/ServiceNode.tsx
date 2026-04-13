@@ -1,4 +1,4 @@
-import { Handle, Position, type NodeProps } from '@xyflow/react';
+import { Handle, Position, NodeResizer, type NodeProps } from '@xyflow/react';
 import type { DiagramNode } from '../../types';
 import { useDiagramStore } from '../../store/diagramStore';
 import { CogButton } from '../CogButton';
@@ -16,10 +16,11 @@ export function ServiceNode({ id, data, selected }: NodeProps<DiagramNode>) {
 
   return (
     <div
-      className={`px-5 py-3 rounded-lg border-2 bg-white shadow-sm w-[120px] text-center
+      className={`px-5 py-3 rounded-lg border-2 bg-white shadow-sm w-full h-full min-w-[80px] text-center
         ${selected ? 'border-blue-500 shadow-md' : 'border-blue-300'}`}
       onDoubleClick={() => setEditing(true)}
     >
+      <NodeResizer minWidth={80} minHeight={40} isVisible={!!selected} lineClassName="!border-blue-400" handleClassName="!bg-blue-400 !w-2 !h-2 !border-white" />
       <Handle type="source" id="top" position={Position.Top} className="!bg-blue-400 !w-4 !h-4" />
       <CogButton nodeId={id} data={data} />
       <TechButton nodeId={id} data={data} nodeType="service" />

@@ -9,6 +9,7 @@ const nodeItems: { type: DiagramNodeType; label: string; icon: string; color: st
   { type: 'cache', label: 'Cache', icon: '{}', color: 'border-red-300 bg-red-50' },
   { type: 'user', label: 'User / Client', icon: '()', color: 'border-gray-300 bg-gray-50' },
   { type: 'cloud', label: 'Cloud / CDN', icon: '~~', color: 'border-sky-300 bg-sky-50' },
+  { type: 'environment', label: 'Environment', icon: '[ ]', color: 'border-teal-300 bg-teal-50' },
 ];
 
 function onDragStart(event: DragEvent, nodeType: DiagramNodeType) {

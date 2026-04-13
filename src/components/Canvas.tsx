@@ -52,13 +52,22 @@ export function Canvas() {
         user: 'User',
         cloud: 'Cloud',
         cache: 'Cache',
+        environment: 'Environment',
       };
+
+      const isEnv = type === 'environment';
 
       const newNode: DiagramNode = {
         id: `node_${Date.now()}`,
         type,
         position,
         data: { label: defaultLabels[type] },
+        ...(isEnv && {
+          style: { width: 300, height: 200, zIndex: -1 },
+          width: 300,
+          height: 200,
+          zIndex: -1,
+        }),
       };
 
       addNode(newNode);

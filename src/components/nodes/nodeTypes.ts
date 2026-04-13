@@ -6,6 +6,7 @@ import { LoadBalancerNode } from './LoadBalancerNode';
 import { UserNode } from './UserNode';
 import { CloudNode } from './CloudNode';
 import { CacheNode } from './CacheNode';
+import { EnvironmentNode } from './EnvironmentNode';
 
 export const nodeTypes: NodeTypes = {
   service: ServiceNode,
@@ -15,4 +16,5 @@ export const nodeTypes: NodeTypes = {
   user: UserNode,
   cloud: CloudNode,
   cache: CacheNode,
+  environment: EnvironmentNode,
 };

@@ -7,7 +7,8 @@ export type DiagramNodeType =
   | 'loadBalancer'
   | 'user'
   | 'cloud'
-  | 'cache';
+  | 'cache'
+  | 'environment';
 
 export type ConfigEntry = { key: string; value: string; children?: ConfigEntry[] };
 
