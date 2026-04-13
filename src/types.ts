@@ -15,6 +15,7 @@ export type DiagramNodeType =
   | 'image';
 
 export type ConfigEntry = { key: string; value: string; children?: ConfigEntry[] };
+export type NodeChild = { id: string; name: string; config?: string };
 
 export type DiagramNodeData = {
   label: string;
@@ -22,6 +23,7 @@ export type DiagramNodeData = {
   configEntries?: ConfigEntry[];
   techId?: string;
   techCustom?: string;
+  children?: NodeChild[];
   arrowGroupId?: string;
   imageDataUrl?: string;
 };

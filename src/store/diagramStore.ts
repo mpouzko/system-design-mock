@@ -8,7 +8,7 @@ import {
   type OnConnect,
   type Connection,
 } from '@xyflow/react';
-import type { DiagramNode, DiagramEdge, Diagram, ConfigEntry } from '../types';
+import type { DiagramNode, DiagramEdge, Diagram, ConfigEntry, NodeChild } from '../types';
 import { saveDiagram, loadDiagram, listDiagrams, deleteDiagram as removeDiagram } from '../utils/storage';
 
 type DiagramState = {
@@ -28,6 +28,8 @@ type DiagramState = {
   updateEdgeLabel: (edgeId: string, label: string) => void;
   updateNodeConfig: (nodeId: string, configText: string, configEntries: ConfigEntry[]) => void;
   updateNodeTech: (nodeId: string, techId: string, techCustom?: string) => void;
+  addNodeChild: (nodeId: string, child: NodeChild) => void;
+  removeNodeChild: (nodeId: string, childId: string) => void;
   addArrowPoint: (afterNodeId: string) => void;
   removeArrowPoint: (nodeId: string) => void;
   deleteSelected: () => void;
@@ -105,6 +107,26 @@ export const useDiagramStore = create<DiagramState>((set, get) => ({
     set({
       nodes: get().nodes.map((n) =>
         n.id === nodeId ? { ...n, data: { ...n.data, techId, techCustom } } : n
+      ),
+    });
+  },
+
+  addNodeChild: (nodeId, child) => {
+    set({
+      nodes: get().nodes.map((n) =>
+        n.id === nodeId
+          ? { ...n, data: { ...n.data, children: [...(n.data.children ?? []), child] } }
+          : n
+      ),
+    });
+  },
+
+  removeNodeChild: (nodeId, childId) => {
+    set({
+      nodes: get().nodes.map((n) =>
+        n.id === nodeId
+          ? { ...n, data: { ...n.data, children: (n.data.children ?? []).filter((c) => c.id !== childId) } }
+          : n
       ),
     });
   },

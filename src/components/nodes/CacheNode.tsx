@@ -2,6 +2,8 @@ import { Handle, Position, NodeResizer, type NodeProps } from '@xyflow/react';
 import type { DiagramNode } from '../../types';
 import { useDiagramStore } from '../../store/diagramStore';
 import { CogButton } from '../CogButton';
+import { AddChildButton } from '../AddChildButton';
+import { ChildrenList } from '../ChildrenList';
 import { TechButton } from '../TechButton';
 import { TechLabel } from '../TechLabel';
 import { useState, useRef, useEffect } from 'react';
@@ -50,6 +52,8 @@ export function CacheNode({ id, data, selected }: NodeProps<DiagramNode>) {
         <div className="text-base font-medium text-gray-700">{data.label}</div>
       )}
 
+      <AddChildButton nodeId={id} />
+      <ChildrenList nodeId={id} children={data.children} />
       <Handle type="source" id="bottom" position={Position.Bottom} className="!bg-red-400 !w-4 !h-4" />
       <Handle type="source" id="right" position={Position.Right} className="!bg-red-400 !w-4 !h-4" />
     </div>
