@@ -3,6 +3,7 @@ import type { DiagramNode } from '../../types';
 import { useDiagramStore } from '../../store/diagramStore';
 import { CogButton } from '../CogButton';
 import { TechButton } from '../TechButton';
+import { TechLabel } from '../TechLabel';
 import { useState, useRef, useEffect } from 'react';
 
 export function UserNode({ id, data, selected }: NodeProps<DiagramNode>) {
@@ -27,11 +28,12 @@ export function UserNode({ id, data, selected }: NodeProps<DiagramNode>) {
 
       <svg viewBox="0 0 60 70" className="w-14 h-auto" xmlns="http://www.w3.org/2000/svg">
         <circle cx="30" cy="18" r="14"
-          fill="white" stroke={selected ? '#6b7280' : '#d1d5db'} strokeWidth="2.5" />
+          fill="white" stroke={selected ? '#6b7280' : '#d1d5db'} strokeWidth="1.5" />
         <path d="M4 65 C4 45 56 45 56 65"
-          fill="white" stroke={selected ? '#6b7280' : '#d1d5db'} strokeWidth="2.5" />
+          fill="white" stroke={selected ? '#6b7280' : '#d1d5db'} strokeWidth="1.5" />
       </svg>
 
+      <TechLabel data={data} nodeType="user" />
       {editing ? (
         <input
           ref={inputRef}

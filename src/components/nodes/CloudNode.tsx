@@ -3,6 +3,7 @@ import type { DiagramNode } from '../../types';
 import { useDiagramStore } from '../../store/diagramStore';
 import { CogButton } from '../CogButton';
 import { TechButton } from '../TechButton';
+import { TechLabel } from '../TechLabel';
 import { useState, useRef, useEffect } from 'react';
 
 export function CloudNode({ id, data, selected }: NodeProps<DiagramNode>) {
@@ -27,10 +28,11 @@ export function CloudNode({ id, data, selected }: NodeProps<DiagramNode>) {
 
       <svg viewBox="0 0 140 80" className="w-full h-auto" xmlns="http://www.w3.org/2000/svg">
         <path d="M30 65 C10 65 5 50 15 40 C5 25 20 10 40 15 C50 0 80 0 90 15 C110 5 135 15 130 35 C145 45 135 65 115 65 Z"
-          fill="white" stroke={selected ? '#38bdf8' : '#7dd3fc'} strokeWidth="2.5" />
+          fill="white" stroke={selected ? '#38bdf8' : '#7dd3fc'} strokeWidth="1.5" />
       </svg>
 
-      <div className="absolute inset-0 flex items-center justify-center pt-1">
+      <div className="absolute inset-0 flex flex-col items-center justify-center pt-1">
+        <TechLabel data={data} nodeType="cloud" />
         {editing ? (
           <input
             ref={inputRef}
@@ -43,7 +45,7 @@ export function CloudNode({ id, data, selected }: NodeProps<DiagramNode>) {
         ) : (
           <div className="text-sm font-medium text-gray-700">{data.label}</div>
         )}
-      </div>
+        </div>
 
       <Handle type="source" id="bottom" position={Position.Bottom} className="!bg-sky-400 !w-4 !h-4" />
       <Handle type="source" id="right" position={Position.Right} className="!bg-sky-400 !w-4 !h-4" />

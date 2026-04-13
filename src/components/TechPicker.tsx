@@ -14,7 +14,6 @@ type Props = {
 export function TechPicker({ nodeId, nodeType, anchorRef, onClose }: Props) {
   const updateNodeTech = useDiagramStore((s) => s.updateNodeTech);
   const [search, setSearch] = useState('');
-  const [customName, setCustomName] = useState('');
   const popupRef = useRef<HTMLDivElement>(null);
   const [pos, setPos] = useState({ top: 0, left: 0 });
 
@@ -57,15 +56,26 @@ export function TechPicker({ nodeId, nodeType, anchorRef, onClose }: Props) {
       style={{ top: pos.top, left: Math.max(8, pos.left) }}
       onMouseDown={(e) => e.stopPropagation()}
     >
-      {/* Search */}
-      <div className="p-2 border-b border-gray-100">
+      {/* Search + Add Custom */}
+      <div className="p-2 border-b border-gray-100 space-y-1.5">
         <input
           className="w-full px-2 py-1.5 text-xs bg-gray-50 border border-gray-200 rounded outline-none focus:border-blue-300"
-          placeholder="Search..."
+          placeholder="Search or type custom..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' && search.trim()) select('custom', search.trim());
+          }}
           autoFocus
         />
+        {search.trim() && (
+          <button
+            className="w-full text-xs text-blue-500 hover:text-blue-700 font-medium py-1 text-left"
+            onClick={() => select('custom', search.trim())}
+          >
+            + Add "{search.trim()}"
+          </button>
+        )}
       </div>
 
       {/* Options grid */}
@@ -90,27 +100,8 @@ export function TechPicker({ nodeId, nodeType, anchorRef, onClose }: Props) {
         )}
       </div>
 
-      {/* Custom + Clear */}
-      <div className="p-2 border-t border-gray-100 space-y-1.5">
-        <div className="flex gap-1">
-          <input
-            className="flex-1 min-w-0 px-2 py-1 text-xs bg-gray-50 border border-gray-200 rounded outline-none focus:border-blue-300"
-            placeholder="Custom name..."
-            value={customName}
-            onChange={(e) => setCustomName(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' && customName.trim()) {
-                select('custom', customName.trim());
-              }
-            }}
-          />
-          <button
-            className="px-2 py-1 text-xs bg-blue-500 hover:bg-blue-600 text-white rounded font-medium shrink-0"
-            onClick={() => { if (customName.trim()) select('custom', customName.trim()); }}
-          >
-            Set
-          </button>
-        </div>
+      {/* Footer */}
+      <div className="p-2 border-t border-gray-100">
         <button
           className="w-full text-xs text-gray-400 hover:text-red-500 py-1"
           onClick={clearSelection}

@@ -3,6 +3,7 @@ import type { DiagramNode } from '../../types';
 import { useDiagramStore } from '../../store/diagramStore';
 import { CogButton } from '../CogButton';
 import { TechButton } from '../TechButton';
+import { TechLabel } from '../TechLabel';
 import { useState, useRef, useEffect } from 'react';
 
 export function ServiceNode({ id, data, selected }: NodeProps<DiagramNode>) {
@@ -16,7 +17,7 @@ export function ServiceNode({ id, data, selected }: NodeProps<DiagramNode>) {
 
   return (
     <div
-      className={`px-5 py-3 rounded-lg border-2 bg-white shadow-sm w-full h-full min-w-[80px] text-center
+      className={`px-5 py-3 rounded-lg border bg-white shadow-sm w-full h-full min-w-[80px] text-center
         ${selected ? 'border-blue-500 shadow-md' : 'border-blue-300'}`}
       onDoubleClick={() => setEditing(true)}
     >
@@ -26,6 +27,7 @@ export function ServiceNode({ id, data, selected }: NodeProps<DiagramNode>) {
       <TechButton nodeId={id} data={data} nodeType="service" />
       <Handle type="source" id="left" position={Position.Left} className="!bg-blue-400 !w-4 !h-4" />
 
+      <TechLabel data={data} nodeType="service" />
       {editing ? (
         <input
           ref={inputRef}

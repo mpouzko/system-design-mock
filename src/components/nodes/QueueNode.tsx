@@ -3,6 +3,7 @@ import type { DiagramNode } from '../../types';
 import { useDiagramStore } from '../../store/diagramStore';
 import { CogButton } from '../CogButton';
 import { TechButton } from '../TechButton';
+import { TechLabel } from '../TechLabel';
 import { useState, useRef, useEffect } from 'react';
 
 export function QueueNode({ id, data, selected }: NodeProps<DiagramNode>) {
@@ -27,10 +28,11 @@ export function QueueNode({ id, data, selected }: NodeProps<DiagramNode>) {
 
       <svg viewBox="0 0 140 50" className="w-full h-auto" xmlns="http://www.w3.org/2000/svg">
         <path d="M15 2 L125 2 L135 25 L125 48 L15 48 L25 25 Z"
-          fill="white" stroke={selected ? '#f97316' : '#fdba74'} strokeWidth="2.5" />
+          fill="white" stroke={selected ? '#f97316' : '#fdba74'} strokeWidth="1.5" />
       </svg>
 
-      <div className="absolute inset-0 flex items-center justify-center">
+      <div className="absolute inset-0 flex flex-col items-center justify-center">
+        <TechLabel data={data} nodeType="queue" />
         {editing ? (
           <input
             ref={inputRef}
@@ -43,7 +45,7 @@ export function QueueNode({ id, data, selected }: NodeProps<DiagramNode>) {
         ) : (
           <div className="text-sm font-medium text-gray-700">{data.label}</div>
         )}
-      </div>
+        </div>
 
       <Handle type="source" id="bottom" position={Position.Bottom} className="!bg-orange-400 !w-4 !h-4" />
       <Handle type="source" id="right" position={Position.Right} className="!bg-orange-400 !w-4 !h-4" />

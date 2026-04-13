@@ -3,6 +3,7 @@ import type { DiagramNode } from '../../types';
 import { useDiagramStore } from '../../store/diagramStore';
 import { CogButton } from '../CogButton';
 import { TechButton } from '../TechButton';
+import { TechLabel } from '../TechLabel';
 import { useState, useRef, useEffect } from 'react';
 
 export function LoadBalancerNode({ id, data, selected }: NodeProps<DiagramNode>) {
@@ -27,10 +28,11 @@ export function LoadBalancerNode({ id, data, selected }: NodeProps<DiagramNode>)
 
       <svg viewBox="0 0 100 80" className="w-full h-auto" xmlns="http://www.w3.org/2000/svg">
         <polygon points="50,2 98,40 50,78 2,40"
-          fill="white" stroke={selected ? '#a855f7' : '#c4b5fd'} strokeWidth="2.5" />
+          fill="white" stroke={selected ? '#a855f7' : '#c4b5fd'} strokeWidth="1.5" />
       </svg>
 
-      <div className="absolute inset-0 flex items-center justify-center">
+      <div className="absolute inset-0 flex flex-col items-center justify-center">
+        <TechLabel data={data} nodeType="loadBalancer" />
         {editing ? (
           <input
             ref={inputRef}
@@ -43,7 +45,7 @@ export function LoadBalancerNode({ id, data, selected }: NodeProps<DiagramNode>)
         ) : (
           <div className="text-xs font-medium text-gray-700">{data.label}</div>
         )}
-      </div>
+        </div>
 
       <Handle type="source" id="bottom" position={Position.Bottom} className="!bg-purple-500 !w-4 !h-4" />
       <Handle type="source" id="right" position={Position.Right} className="!bg-purple-500 !w-4 !h-4" />
