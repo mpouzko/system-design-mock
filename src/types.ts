@@ -8,7 +8,10 @@ export type DiagramNodeType =
   | 'user'
   | 'cloud'
   | 'cache'
-  | 'environment';
+  | 'environment'
+  | 'text'
+  | 'rectangle'
+  | 'arrow';
 
 export type ConfigEntry = { key: string; value: string; children?: ConfigEntry[] };
 
@@ -18,6 +21,7 @@ export type DiagramNodeData = {
   configEntries?: ConfigEntry[];
   techId?: string;
   techCustom?: string;
+  arrowGroupId?: string;
 };
 
 export type DiagramNode = Node<DiagramNodeData, DiagramNodeType>;

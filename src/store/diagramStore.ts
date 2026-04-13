@@ -23,10 +23,13 @@ type DiagramState = {
   onConnect: OnConnect;
 
   addNode: (node: DiagramNode) => void;
+  addEdgeDirect: (edge: DiagramEdge) => void;
   updateNodeLabel: (nodeId: string, label: string) => void;
   updateEdgeLabel: (edgeId: string, label: string) => void;
   updateNodeConfig: (nodeId: string, configText: string, configEntries: ConfigEntry[]) => void;
   updateNodeTech: (nodeId: string, techId: string, techCustom?: string) => void;
+  addArrowPoint: (afterNodeId: string) => void;
+  removeArrowPoint: (nodeId: string) => void;
   deleteSelected: () => void;
 
   setDiagramName: (name: string) => void;
@@ -70,6 +73,10 @@ export const useDiagramStore = create<DiagramState>((set, get) => ({
     set({ nodes: [...get().nodes, node] });
   },
 
+  addEdgeDirect: (edge) => {
+    set({ edges: [...get().edges, edge] });
+  },
+
   updateNodeLabel: (nodeId, label) => {
     set({
       nodes: get().nodes.map((n) =>
@@ -99,6 +106,86 @@ export const useDiagramStore = create<DiagramState>((set, get) => ({
       nodes: get().nodes.map((n) =>
         n.id === nodeId ? { ...n, data: { ...n.data, techId, techCustom } } : n
       ),
+    });
+  },
+
+  addArrowPoint: (afterNodeId) => {
+    const { nodes, edges } = get();
+    const afterNode = nodes.find((n) => n.id === afterNodeId);
+    if (!afterNode || afterNode.type !== 'arrow') return;
+
+    // Find outgoing edge from this node to another arrow node
+    const outEdge = edges.find(
+      (e) => e.source === afterNodeId && nodes.find((n) => n.id === e.target)?.type === 'arrow'
+    );
+    if (!outEdge) return;
+
+    const targetNode = nodes.find((n) => n.id === outEdge.target);
+    if (!targetNode) return;
+
+    const ts = Date.now();
+    const newNode: DiagramNode = {
+      id: `node_${ts}_mid`,
+      type: 'arrow',
+      position: {
+        x: (afterNode.position.x + targetNode.position.x) / 2,
+        y: (afterNode.position.y + targetNode.position.y) / 2,
+      },
+      data: { label: '', arrowGroupId: afterNode.data.arrowGroupId },
+    };
+
+    const edge1: DiagramEdge = {
+      id: `edge_${ts}_a`,
+      source: afterNodeId,
+      sourceHandle: 'center',
+      target: newNode.id,
+      targetHandle: 'center-left',
+      type: 'custom',
+      data: { label: '' },
+    };
+    const edge2: DiagramEdge = {
+      id: `edge_${ts}_b`,
+      source: newNode.id,
+      sourceHandle: 'center',
+      target: outEdge.target,
+      targetHandle: outEdge.targetHandle,
+      type: 'custom',
+      data: { label: '' },
+    };
+
+    set({
+      nodes: [...nodes, newNode],
+      edges: [...edges.filter((e) => e.id !== outEdge.id), edge1, edge2],
+    });
+  },
+
+  removeArrowPoint: (nodeId) => {
+    const { nodes, edges } = get();
+    const node = nodes.find((n) => n.id === nodeId);
+    if (!node || node.type !== 'arrow') return;
+
+    // Find incoming and outgoing arrow edges
+    const inEdge = edges.find(
+      (e) => e.target === nodeId && nodes.find((n) => n.id === e.source)?.type === 'arrow'
+    );
+    const outEdge = edges.find(
+      (e) => e.source === nodeId && nodes.find((n) => n.id === e.target)?.type === 'arrow'
+    );
+    if (!inEdge || !outEdge) return;
+
+    const bridgeEdge: DiagramEdge = {
+      id: `edge_${Date.now()}`,
+      source: inEdge.source,
+      sourceHandle: inEdge.sourceHandle,
+      target: outEdge.target,
+      targetHandle: outEdge.targetHandle,
+      type: 'custom',
+      data: { label: '' },
+    };
+
+    set({
+      nodes: nodes.filter((n) => n.id !== nodeId),
+      edges: [...edges.filter((e) => e.id !== inEdge.id && e.id !== outEdge.id), bridgeEdge],
     });
   },
 

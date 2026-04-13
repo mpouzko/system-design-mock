@@ -7,6 +7,9 @@ import { UserNode } from './UserNode';
 import { CloudNode } from './CloudNode';
 import { CacheNode } from './CacheNode';
 import { EnvironmentNode } from './EnvironmentNode';
+import { TextNode } from './TextNode';
+import { RectangleNode } from './RectangleNode';
+import { ArrowNode } from './ArrowNode';
 
 export const nodeTypes: NodeTypes = {
   service: ServiceNode,
@@ -17,4 +20,7 @@ export const nodeTypes: NodeTypes = {
   cloud: CloudNode,
   cache: CacheNode,
   environment: EnvironmentNode,
+  text: TextNode,
+  rectangle: RectangleNode,
+  arrow: ArrowNode,
 };

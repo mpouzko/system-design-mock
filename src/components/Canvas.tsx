@@ -11,7 +11,7 @@ import {
 import { useDiagramStore } from '../store/diagramStore';
 import { nodeTypes } from './nodes/nodeTypes';
 import { CustomEdge } from '../edges/CustomEdge';
-import type { DiagramNodeType, DiagramNode } from '../types';
+import type { DiagramNodeType, DiagramNode, DiagramEdge } from '../types';
 
 const edgeTypes = { custom: CustomEdge };
 
@@ -23,6 +23,7 @@ export function Canvas() {
     onEdgesChange,
     onConnect,
     addNode,
+    addEdgeDirect,
   } = useDiagramStore();
 
   const reactFlowWrapper = useRef<HTMLDivElement>(null);
@@ -53,7 +54,40 @@ export function Canvas() {
         cloud: 'Cloud',
         cache: 'Cache',
         environment: 'Environment',
+        text: 'Text',
+        rectangle: '',
+        arrow: '',
       };
+
+      if (type === 'arrow') {
+        const ts = Date.now();
+        const groupId = `arrow_${ts}`;
+        const startNode: DiagramNode = {
+          id: `node_${ts}_start`,
+          type: 'arrow',
+          position,
+          data: { label: '', arrowGroupId: groupId },
+        };
+        const endNode: DiagramNode = {
+          id: `node_${ts}_end`,
+          type: 'arrow',
+          position: { x: position.x + 150, y: position.y },
+          data: { label: '', arrowGroupId: groupId },
+        };
+        const edge: DiagramEdge = {
+          id: `edge_${ts}`,
+          source: startNode.id,
+          sourceHandle: 'center',
+          target: endNode.id,
+          targetHandle: 'center-left',
+          type: 'custom',
+          data: { label: '' },
+        };
+        addNode(startNode);
+        addNode(endNode);
+        addEdgeDirect(edge);
+        return;
+      }
 
       const isEnv = type === 'environment';
 
@@ -72,7 +106,7 @@ export function Canvas() {
 
       addNode(newNode);
     },
-    [addNode]
+    [addNode, addEdgeDirect]
   );
 
   return (

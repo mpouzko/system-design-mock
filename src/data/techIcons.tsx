@@ -110,6 +110,9 @@ export const techOptions: Record<DiagramNodeType, TechOption[]> = {
   cloud: cloudOptions,
   user: userOptions,
   environment: environmentOptions,
+  text: [],
+  rectangle: [],
+  arrow: [],
 };
 
 export function getTechOption(nodeType: DiagramNodeType, techId: string): TechOption | undefined {
