@@ -6,6 +6,14 @@ import { TechButton } from '../TechButton';
 import { TechLabel } from '../TechLabel';
 import { useState, useRef, useEffect } from 'react';
 
+export const config = {
+  title: 'Load Balancer',
+  strokeColor: '#c4b5fd',
+  selectedStrokeColor: '#a855f7',
+  strokeWidth: 1.5,
+  size: { minWidth: 160, minHeight: 100 },
+};
+
 export function LoadBalancerNode({ id, data, selected }: NodeProps<DiagramNode>) {
   const updateNodeLabel = useDiagramStore((s) => s.updateNodeLabel);
   const [editing, setEditing] = useState(false);
@@ -20,15 +28,15 @@ export function LoadBalancerNode({ id, data, selected }: NodeProps<DiagramNode>)
       className={`relative w-full h-full min-w-[80px] text-center ${selected ? 'drop-shadow-md' : 'drop-shadow-sm'}`}
       onDoubleClick={() => setEditing(true)}
     >
-      <NodeResizer minWidth={80} minHeight={40} isVisible={!!selected} lineClassName="!border-purple-400" handleClassName="!bg-purple-500 !w-2 !h-2 !border-white" />
+      <NodeResizer minWidth={config.size.minWidth} minHeight={config.size.minHeight} isVisible={!!selected} lineClassName="!border-purple-400" handleClassName="!bg-purple-500 !w-2 !h-2 !border-white" />
       <Handle type="source" id="top" position={Position.Top} className="!bg-purple-500 !w-4 !h-4" />
       <CogButton nodeId={id} data={data} />
       <TechButton nodeId={id} data={data} nodeType="loadBalancer" />
       <Handle type="source" id="left" position={Position.Left} className="!bg-purple-500 !w-4 !h-4" />
 
-      <svg viewBox="0 0 100 80" className="w-full h-auto" xmlns="http://www.w3.org/2000/svg">
+      <svg viewBox="0 0 100 80" className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
         <polygon points="50,2 98,40 50,78 2,40"
-          fill="white" stroke={selected ? '#a855f7' : '#c4b5fd'} strokeWidth="1.5" />
+          fill="white" stroke={selected ? config.selectedStrokeColor : config.strokeColor} strokeWidth={config.strokeWidth} />
       </svg>
 
       <div className="absolute inset-0 flex flex-col items-center justify-center">

@@ -12,6 +12,29 @@ import { useDiagramStore } from '../store/diagramStore';
 import { nodeTypes } from './nodes/nodeTypes';
 import { CustomEdge } from '../edges/CustomEdge';
 import type { DiagramNodeType, DiagramNode, DiagramEdge } from '../types';
+import { config as serviceConfig } from './nodes/ServiceNode';
+import { config as databaseConfig } from './nodes/DatabaseNode';
+import { config as queueConfig } from './nodes/QueueNode';
+import { config as loadBalancerConfig } from './nodes/LoadBalancerNode';
+import { config as userConfig } from './nodes/UserNode';
+import { config as cloudConfig } from './nodes/CloudNode';
+import { config as cacheConfig } from './nodes/CacheNode';
+import { config as environmentConfig } from './nodes/EnvironmentNode';
+import { config as textConfig } from './nodes/TextNode';
+import { config as rectangleConfig } from './nodes/RectangleNode';
+
+const nodeConfigs: Partial<Record<DiagramNodeType, { title: string; size: { minWidth: number; minHeight: number } }>> = {
+  service: serviceConfig,
+  database: databaseConfig,
+  queue: queueConfig,
+  loadBalancer: loadBalancerConfig,
+  user: userConfig,
+  cloud: cloudConfig,
+  cache: cacheConfig,
+  environment: environmentConfig,
+  text: textConfig,
+  rectangle: rectangleConfig,
+};
 
 const edgeTypes = { custom: CustomEdge };
 
@@ -45,19 +68,7 @@ export function Canvas() {
         y: event.clientY,
       });
 
-      const defaultLabels: Record<DiagramNodeType, string> = {
-        service: 'Service',
-        database: 'Database',
-        queue: 'Queue',
-        loadBalancer: 'Load Balancer',
-        user: 'User',
-        cloud: 'Cloud',
-        cache: 'Cache',
-        environment: 'Environment',
-        text: 'Text',
-        rectangle: '',
-        arrow: '',
-      };
+      const label = nodeConfigs[type]?.title ?? '';
 
       if (type === 'arrow') {
         const ts = Date.now();
@@ -90,25 +101,21 @@ export function Canvas() {
       }
 
       const isEnv = type === 'environment';
-      const smallSvgNodes: DiagramNodeType[] = ['database', 'queue', 'loadBalancer', 'cloud'];
-      const isSmallSvg = smallSvgNodes.includes(type);
+      const cfg = nodeConfigs[type];
+      const w = cfg?.size.minWidth;
+      const h = cfg?.size.minHeight;
 
       const newNode: DiagramNode = {
         id: `node_${Date.now()}`,
         type,
         position,
-        data: { label: defaultLabels[type] },
-        ...(isSmallSvg && {
-          style: { width: 100, height: 80 },
-          width: 100,
-          height: 80,
+        data: { label },
+        ...(w && h && {
+          style: { width: w, height: h, ...(isEnv && { zIndex: -1 }) },
+          width: w,
+          height: h,
         }),
-        ...(isEnv && {
-          style: { width: 300, height: 200, zIndex: -1 },
-          width: 300,
-          height: 200,
-          zIndex: -1,
-        }),
+        ...(isEnv && { zIndex: -1 }),
       };
 
       addNode(newNode);

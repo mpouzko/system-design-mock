@@ -1,6 +1,10 @@
 import { getTechOption } from '../data/techIcons';
 import type { DiagramNodeData, DiagramNodeType } from '../types';
 
+export const techLabelConfig = {
+  fontSize: 12,
+};
+
 type Props = {
   data: DiagramNodeData;
   nodeType: DiagramNodeType;
@@ -15,6 +19,6 @@ export function TechLabel({ data, nodeType }: Props) {
   if (!name) return null;
 
   return (
-    <div className="text-xs text-blue-500 font-medium mb-0.5 truncate">{name}</div>
+    <div style={{ fontSize: techLabelConfig.fontSize }} className="text-blue-500 font-medium mb-0.5 truncate">{name}</div>
   );
 }

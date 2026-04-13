@@ -6,6 +6,14 @@ import { TechButton } from '../TechButton';
 import { TechLabel } from '../TechLabel';
 import { useState, useRef, useEffect } from 'react';
 
+export const config = {
+  title: 'Cache',
+  strokeColor: '#fca5a5',
+  selectedStrokeColor: '#ef4444',
+  strokeWidth: 1,
+  size: { minWidth: 120, minHeight: 50 },
+};
+
 export function CacheNode({ id, data, selected }: NodeProps<DiagramNode>) {
   const updateNodeLabel = useDiagramStore((s) => s.updateNodeLabel);
   const [editing, setEditing] = useState(false);
@@ -17,11 +25,12 @@ export function CacheNode({ id, data, selected }: NodeProps<DiagramNode>) {
 
   return (
     <div
-      className={`px-5 py-3 rounded-xl border border-dashed bg-white shadow-sm w-full h-full min-w-[80px] text-center
-        ${selected ? 'border-red-500 shadow-md' : 'border-red-300'}`}
+      style={{ borderColor: selected ? config.selectedStrokeColor : config.strokeColor, borderWidth: config.strokeWidth }}
+      className={`px-5 py-3 rounded-xl border border-dashed bg-white shadow-sm w-full h-full text-center
+        ${selected ? 'shadow-md' : ''}`}
       onDoubleClick={() => setEditing(true)}
     >
-      <NodeResizer minWidth={80} minHeight={40} isVisible={!!selected} lineClassName="!border-red-400" handleClassName="!bg-red-400 !w-2 !h-2 !border-white" />
+      <NodeResizer minWidth={config.size.minWidth} minHeight={config.size.minHeight} isVisible={!!selected} lineClassName="!border-red-400" handleClassName="!bg-red-400 !w-2 !h-2 !border-white" />
       <Handle type="source" id="top" position={Position.Top} className="!bg-red-400 !w-4 !h-4" />
       <CogButton nodeId={id} data={data} />
       <TechButton nodeId={id} data={data} nodeType="cache" />

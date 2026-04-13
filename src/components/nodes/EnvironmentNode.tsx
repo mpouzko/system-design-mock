@@ -6,6 +6,14 @@ import { TechButton } from '../TechButton';
 import { TechLabel } from '../TechLabel';
 import { useState, useRef, useEffect } from 'react';
 
+export const config = {
+  title: 'Environment',
+  strokeColor: '#5eead4',
+  selectedStrokeColor: '#14b8a6',
+  strokeWidth: 1,
+  size: { minWidth: 150, minHeight: 100 },
+};
+
 export function EnvironmentNode({ id, data, selected }: NodeProps<DiagramNode>) {
   const updateNodeLabel = useDiagramStore((s) => s.updateNodeLabel);
   const [editing, setEditing] = useState(false);
@@ -17,10 +25,10 @@ export function EnvironmentNode({ id, data, selected }: NodeProps<DiagramNode>) 
 
   return (
     <div
-      className={`w-full h-full rounded-xl border border-dashed bg-teal-50/40 relative
-        ${selected ? 'border-teal-500' : 'border-teal-300'}`}
+      style={{ borderColor: selected ? config.selectedStrokeColor : config.strokeColor, borderWidth: config.strokeWidth }}
+      className={`w-full h-full rounded-xl border border-dashed bg-teal-50/40 relative`}
     >
-      <NodeResizer minWidth={150} minHeight={100} isVisible={!!selected} lineClassName="!border-teal-400" handleClassName="!bg-teal-400 !w-2.5 !h-2.5 !border-white" />
+      <NodeResizer minWidth={config.size.minWidth} minHeight={config.size.minHeight} isVisible={!!selected} lineClassName="!border-teal-400" handleClassName="!bg-teal-400 !w-2.5 !h-2.5 !border-white" />
       <Handle type="source" id="top" position={Position.Top} className="!bg-teal-400 !w-4 !h-4" />
       <Handle type="source" id="left" position={Position.Left} className="!bg-teal-400 !w-4 !h-4" />
       <CogButton nodeId={id} data={data} />

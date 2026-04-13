@@ -6,6 +6,14 @@ import { TechButton } from '../TechButton';
 import { TechLabel } from '../TechLabel';
 import { useState, useRef, useEffect } from 'react';
 
+export const config = {
+  title: 'Cloud / CDN',
+  strokeColor: '#7dd3fc',
+  selectedStrokeColor: '#38bdf8',
+  strokeWidth: 1.5,
+  size: { minWidth: 80, minHeight: 40 },
+};
+
 export function CloudNode({ id, data, selected }: NodeProps<DiagramNode>) {
   const updateNodeLabel = useDiagramStore((s) => s.updateNodeLabel);
   const [editing, setEditing] = useState(false);
@@ -20,15 +28,15 @@ export function CloudNode({ id, data, selected }: NodeProps<DiagramNode>) {
       className={`relative w-full h-full min-w-[80px] text-center ${selected ? 'drop-shadow-md' : 'drop-shadow-sm'}`}
       onDoubleClick={() => setEditing(true)}
     >
-      <NodeResizer minWidth={80} minHeight={40} isVisible={!!selected} lineClassName="!border-sky-400" handleClassName="!bg-sky-400 !w-2 !h-2 !border-white" />
+      <NodeResizer minWidth={config.size.minWidth} minHeight={config.size.minHeight} isVisible={!!selected} lineClassName="!border-sky-400" handleClassName="!bg-sky-400 !w-2 !h-2 !border-white" />
       <Handle type="source" id="top" position={Position.Top} className="!bg-sky-400 !w-4 !h-4" />
       <CogButton nodeId={id} data={data} />
       <TechButton nodeId={id} data={data} nodeType="cloud" />
       <Handle type="source" id="left" position={Position.Left} className="!bg-sky-400 !w-4 !h-4" />
 
-      <svg viewBox="0 0 140 80" className="w-full h-auto" xmlns="http://www.w3.org/2000/svg">
+      <svg viewBox="0 0 140 80" className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
         <path d="M30 65 C10 65 5 50 15 40 C5 25 20 10 40 15 C50 0 80 0 90 15 C110 5 135 15 130 35 C145 45 135 65 115 65 Z"
-          fill="white" stroke={selected ? '#38bdf8' : '#7dd3fc'} strokeWidth="1.5" />
+          fill="white" stroke={selected ? config.selectedStrokeColor : config.strokeColor} strokeWidth={config.strokeWidth} />
       </svg>
 
       <div className="absolute inset-0 flex flex-col items-center justify-center pt-1">

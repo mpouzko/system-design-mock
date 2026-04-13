@@ -3,6 +3,11 @@ import { ConfigPopup } from './ConfigPopup';
 import { ConfigTooltip } from './ConfigTooltip';
 import type { DiagramNodeData } from '../types';
 
+export const cogButtonConfig = {
+  size: 30,
+  iconSize: 20,
+};
+
 type Props = {
   nodeId: string;
   data: DiagramNodeData;
@@ -19,7 +24,8 @@ export function CogButton({ nodeId, data }: Props) {
     <>
       <button
         ref={btnRef}
-        className={`absolute -top-1 -right-1 w-6 h-6 flex items-center justify-center rounded-full
+        style={{ width: cogButtonConfig.size, height: cogButtonConfig.size }}
+        className={`absolute -top-1 -right-1 flex items-center justify-center rounded-full
           bg-white border border-gray-300 hover:border-blue-400 hover:bg-blue-50
           transition-colors z-10 ${hasConfig ? 'border-blue-400 bg-blue-50' : ''}`}
         onClick={(e) => { e.stopPropagation(); setOpen(!open); }}
@@ -29,7 +35,8 @@ export function CogButton({ nodeId, data }: Props) {
         <svg
           viewBox="0 0 20 20"
           fill="currentColor"
-          className={`w-3.5 h-3.5 ${hasConfig ? 'text-blue-500' : 'text-gray-400'}`}
+          style={{ width: cogButtonConfig.iconSize, height: cogButtonConfig.iconSize }}
+          className={hasConfig ? 'text-blue-500' : 'text-gray-400'}
         >
           <path
             fillRule="evenodd"

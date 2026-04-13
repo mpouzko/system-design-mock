@@ -3,6 +3,14 @@ import type { DiagramNode } from '../../types';
 import { useDiagramStore } from '../../store/diagramStore';
 import { useState, useRef, useEffect } from 'react';
 
+export const config = {
+  title: 'Text',
+  strokeColor: '#e5e7eb',
+  selectedStrokeColor: '#9ca3af',
+  strokeWidth: 1,
+  size: { minWidth: 60, minHeight: 30 },
+};
+
 export function TextNode({ id, data, selected }: NodeProps<DiagramNode>) {
   const updateNodeLabel = useDiagramStore((s) => s.updateNodeLabel);
   const [editing, setEditing] = useState(false);
@@ -14,11 +22,12 @@ export function TextNode({ id, data, selected }: NodeProps<DiagramNode>) {
 
   return (
     <div
-      className={`px-3 py-2 rounded border bg-white w-full h-full min-w-[60px] min-h-[30px]
-        ${selected ? 'border-gray-400 shadow-sm' : 'border-gray-200'}`}
+      style={{ borderColor: selected ? config.selectedStrokeColor : config.strokeColor, borderWidth: config.strokeWidth }}
+      className={`px-3 py-2 rounded border bg-white w-full h-full
+        ${selected ? 'shadow-sm' : ''}`}
       onDoubleClick={() => setEditing(true)}
     >
-      <NodeResizer minWidth={60} minHeight={30} isVisible={!!selected} lineClassName="!border-gray-400" handleClassName="!bg-gray-400 !w-2 !h-2 !border-white" />
+      <NodeResizer minWidth={config.size.minWidth} minHeight={config.size.minHeight} isVisible={!!selected} lineClassName="!border-gray-400" handleClassName="!bg-gray-400 !w-2 !h-2 !border-white" />
       <Handle type="source" id="top" position={Position.Top} className="!bg-gray-400 !w-3 !h-3" />
       <Handle type="source" id="left" position={Position.Left} className="!bg-gray-400 !w-3 !h-3" />
 

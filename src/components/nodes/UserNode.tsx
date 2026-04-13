@@ -6,6 +6,14 @@ import { TechButton } from '../TechButton';
 import { TechLabel } from '../TechLabel';
 import { useState, useRef, useEffect } from 'react';
 
+export const config = {
+  title: 'User / Client',
+  strokeColor: '#d1d5db',
+  selectedStrokeColor: '#6b7280',
+  strokeWidth: 1.5,
+  size: { minWidth: 80, minHeight: 40 },
+};
+
 export function UserNode({ id, data, selected }: NodeProps<DiagramNode>) {
   const updateNodeLabel = useDiagramStore((s) => s.updateNodeLabel);
   const [editing, setEditing] = useState(false);
@@ -20,7 +28,7 @@ export function UserNode({ id, data, selected }: NodeProps<DiagramNode>) {
       className={`flex flex-col items-center w-full h-full min-w-[80px] text-center ${selected ? 'drop-shadow-md' : 'drop-shadow-sm'}`}
       onDoubleClick={() => setEditing(true)}
     >
-      <NodeResizer minWidth={80} minHeight={40} isVisible={!!selected} lineClassName="!border-gray-400" handleClassName="!bg-gray-400 !w-2 !h-2 !border-white" />
+      <NodeResizer minWidth={config.size.minWidth} minHeight={config.size.minHeight} isVisible={!!selected} lineClassName="!border-gray-400" handleClassName="!bg-gray-400 !w-2 !h-2 !border-white" />
       <Handle type="source" id="top" position={Position.Top} className="!bg-gray-400 !w-4 !h-4" />
       <CogButton nodeId={id} data={data} />
       <TechButton nodeId={id} data={data} nodeType="user" />
@@ -28,9 +36,9 @@ export function UserNode({ id, data, selected }: NodeProps<DiagramNode>) {
 
       <svg viewBox="0 0 60 70" className="w-14 h-auto" xmlns="http://www.w3.org/2000/svg">
         <circle cx="30" cy="18" r="14"
-          fill="white" stroke={selected ? '#6b7280' : '#d1d5db'} strokeWidth="1.5" />
+          fill="white" stroke={selected ? config.selectedStrokeColor : config.strokeColor} strokeWidth={config.strokeWidth} />
         <path d="M4 65 C4 45 56 45 56 65"
-          fill="white" stroke={selected ? '#6b7280' : '#d1d5db'} strokeWidth="1.5" />
+          fill="white" stroke={selected ? config.selectedStrokeColor : config.strokeColor} strokeWidth={config.strokeWidth} />
       </svg>
 
       <TechLabel data={data} nodeType="user" />
