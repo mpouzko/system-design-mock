@@ -90,12 +90,19 @@ export function Canvas() {
       }
 
       const isEnv = type === 'environment';
+      const smallSvgNodes: DiagramNodeType[] = ['database', 'queue', 'loadBalancer', 'cloud'];
+      const isSmallSvg = smallSvgNodes.includes(type);
 
       const newNode: DiagramNode = {
         id: `node_${Date.now()}`,
         type,
         position,
         data: { label: defaultLabels[type] },
+        ...(isSmallSvg && {
+          style: { width: 100, height: 80 },
+          width: 100,
+          height: 80,
+        }),
         ...(isEnv && {
           style: { width: 300, height: 200, zIndex: -1 },
           width: 300,

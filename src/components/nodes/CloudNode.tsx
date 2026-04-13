@@ -36,14 +36,14 @@ export function CloudNode({ id, data, selected }: NodeProps<DiagramNode>) {
         {editing ? (
           <input
             ref={inputRef}
-            className="w-24 text-center text-sm font-medium bg-transparent outline-none border-b border-sky-400"
+            className="w-24 text-center text-base font-medium bg-transparent outline-none border-b border-sky-400"
             value={data.label}
             onChange={(e) => updateNodeLabel(id, e.target.value)}
             onBlur={() => setEditing(false)}
             onKeyDown={(e) => e.key === 'Enter' && setEditing(false)}
           />
         ) : (
-          <div className="text-sm font-medium text-gray-700">{data.label}</div>
+          <div className="text-base font-medium text-gray-700">{data.label}</div>
         )}
         </div>
 

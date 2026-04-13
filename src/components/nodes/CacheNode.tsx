@@ -31,14 +31,14 @@ export function CacheNode({ id, data, selected }: NodeProps<DiagramNode>) {
       {editing ? (
         <input
           ref={inputRef}
-          className="w-full text-center text-sm font-medium bg-transparent outline-none border-b border-red-300"
+          className="w-full text-center text-base font-medium bg-transparent outline-none border-b border-red-300"
           value={data.label}
           onChange={(e) => updateNodeLabel(id, e.target.value)}
           onBlur={() => setEditing(false)}
           onKeyDown={(e) => e.key === 'Enter' && setEditing(false)}
         />
       ) : (
-        <div className="text-sm font-medium text-gray-700">{data.label}</div>
+        <div className="text-base font-medium text-gray-700">{data.label}</div>
       )}
 
       <Handle type="source" id="bottom" position={Position.Bottom} className="!bg-red-400 !w-4 !h-4" />

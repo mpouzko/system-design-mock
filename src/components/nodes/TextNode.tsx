@@ -25,13 +25,13 @@ export function TextNode({ id, data, selected }: NodeProps<DiagramNode>) {
       {editing ? (
         <textarea
           ref={inputRef}
-          className="w-full h-full text-sm text-gray-700 bg-transparent outline-none resize-none"
+          className="w-full h-full text-base text-gray-700 bg-transparent outline-none resize-none"
           value={data.label}
           onChange={(e) => updateNodeLabel(id, e.target.value)}
           onBlur={() => setEditing(false)}
         />
       ) : (
-        <div className="text-sm text-gray-700 whitespace-pre-wrap">{data.label}</div>
+        <div className="text-base text-gray-700 whitespace-pre-wrap">{data.label}</div>
       )}
 
       <Handle type="source" id="bottom" position={Position.Bottom} className="!bg-gray-400 !w-3 !h-3" />

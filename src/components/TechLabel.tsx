@@ -15,6 +15,6 @@ export function TechLabel({ data, nodeType }: Props) {
   if (!name) return null;
 
   return (
-    <div className="text-[10px] text-blue-500 font-medium mb-0.5 truncate">{name}</div>
+    <div className="text-xs text-blue-500 font-medium mb-0.5 truncate">{name}</div>
   );
 }

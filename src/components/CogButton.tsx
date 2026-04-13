@@ -19,7 +19,7 @@ export function CogButton({ nodeId, data }: Props) {
     <>
       <button
         ref={btnRef}
-        className={`absolute -top-1 -right-1 w-5 h-5 flex items-center justify-center rounded-full
+        className={`absolute -top-1 -right-1 w-6 h-6 flex items-center justify-center rounded-full
           bg-white border border-gray-300 hover:border-blue-400 hover:bg-blue-50
           transition-colors z-10 ${hasConfig ? 'border-blue-400 bg-blue-50' : ''}`}
         onClick={(e) => { e.stopPropagation(); setOpen(!open); }}
@@ -29,7 +29,7 @@ export function CogButton({ nodeId, data }: Props) {
         <svg
           viewBox="0 0 20 20"
           fill="currentColor"
-          className={`w-3 h-3 ${hasConfig ? 'text-blue-500' : 'text-gray-400'}`}
+          className={`w-3.5 h-3.5 ${hasConfig ? 'text-blue-500' : 'text-gray-400'}`}
         >
           <path
             fillRule="evenodd"
