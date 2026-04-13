@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
 import { ConfigPopup } from './ConfigPopup';
+import { ConfigTooltip } from './ConfigTooltip';
 import type { DiagramNodeData } from '../types';
 
 type Props = {
@@ -9,6 +10,7 @@ type Props = {
 
 export function CogButton({ nodeId, data }: Props) {
   const [open, setOpen] = useState(false);
+  const [hovered, setHovered] = useState(false);
   const btnRef = useRef<HTMLButtonElement>(null);
 
   const hasConfig = !!(data.configText || (data.configEntries && data.configEntries.length > 0));
@@ -21,7 +23,8 @@ export function CogButton({ nodeId, data }: Props) {
           bg-white border border-gray-300 hover:border-blue-400 hover:bg-blue-50
           transition-colors z-10 ${hasConfig ? 'border-blue-400 bg-blue-50' : ''}`}
         onClick={(e) => { e.stopPropagation(); setOpen(!open); }}
-        title="Configure"
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
       >
         <svg
           viewBox="0 0 20 20"
@@ -35,6 +38,9 @@ export function CogButton({ nodeId, data }: Props) {
           />
         </svg>
       </button>
+      {hovered && !open && hasConfig && (
+        <ConfigTooltip data={data} anchorRef={btnRef} />
+      )}
       {open && (
         <ConfigPopup
           nodeId={nodeId}
