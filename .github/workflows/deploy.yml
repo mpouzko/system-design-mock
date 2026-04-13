@@ -24,8 +24,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
-      - run: npm install
+      - run: npm install --no-package-lock
       - run: ./node_modules/.bin/vite build
       - uses: actions/configure-pages@v4
       - uses: actions/upload-pages-artifact@v3
