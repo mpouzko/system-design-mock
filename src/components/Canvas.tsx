@@ -1,4 +1,4 @@
-import { useCallback, useRef, type DragEvent } from 'react';
+import { useCallback, useRef, type DragEvent, type ClipboardEvent } from 'react';
 import {
   ReactFlow,
   Background,
@@ -22,6 +22,7 @@ import { config as cacheConfig } from './nodes/CacheNode';
 import { config as environmentConfig } from './nodes/EnvironmentNode';
 import { config as textConfig } from './nodes/TextNode';
 import { config as rectangleConfig } from './nodes/RectangleNode';
+import { config as imageConfig } from './nodes/ImageNode';
 
 const nodeConfigs: Partial<Record<DiagramNodeType, { title: string; size: { minWidth: number; minHeight: number } }>> = {
   service: serviceConfig,
@@ -34,6 +35,7 @@ const nodeConfigs: Partial<Record<DiagramNodeType, { title: string; size: { minW
   environment: environmentConfig,
   text: textConfig,
   rectangle: rectangleConfig,
+  image: imageConfig,
 };
 
 const edgeTypes = { custom: CustomEdge };
@@ -123,8 +125,51 @@ export function Canvas() {
     [addNode, addEdgeDirect]
   );
 
+  const onPaste = useCallback(
+    (event: ClipboardEvent) => {
+      const items = event.clipboardData?.items;
+      if (!items || !reactFlowInstance.current) return;
+
+      for (const item of items) {
+        if (item.type.startsWith('image/')) {
+          event.preventDefault();
+          const blob = item.getAsFile();
+          if (!blob) return;
+
+          const reader = new FileReader();
+          reader.onload = () => {
+            const dataUrl = reader.result as string;
+            const wrapper = reactFlowWrapper.current;
+            if (!wrapper) return;
+
+            const rect = wrapper.getBoundingClientRect();
+            const position = reactFlowInstance.current!.screenToFlowPosition({
+              x: rect.left + rect.width / 2,
+              y: rect.top + rect.height / 2,
+            });
+
+            const cfg = imageConfig.size;
+            const newNode: DiagramNode = {
+              id: `node_${Date.now()}`,
+              type: 'image',
+              position,
+              data: { label: '', imageDataUrl: dataUrl },
+              style: { width: cfg.minWidth, height: cfg.minHeight },
+              width: cfg.minWidth,
+              height: cfg.minHeight,
+            };
+            addNode(newNode);
+          };
+          reader.readAsDataURL(blob);
+          return;
+        }
+      }
+    },
+    [addNode]
+  );
+
   return (
-    <div ref={reactFlowWrapper} className="flex-1 h-full">
+    <div ref={reactFlowWrapper} className="flex-1 h-full" onPaste={onPaste} tabIndex={0}>
       <ReactFlow
         nodes={nodes}
         edges={edges}

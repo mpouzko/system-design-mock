@@ -11,7 +11,8 @@ export type DiagramNodeType =
   | 'environment'
   | 'text'
   | 'rectangle'
-  | 'arrow';
+  | 'arrow'
+  | 'image';
 
 export type ConfigEntry = { key: string; value: string; children?: ConfigEntry[] };
 
@@ -22,6 +23,7 @@ export type DiagramNodeData = {
   techId?: string;
   techCustom?: string;
   arrowGroupId?: string;
+  imageDataUrl?: string;
 };
 
 export type DiagramNode = Node<DiagramNodeData, DiagramNodeType>;

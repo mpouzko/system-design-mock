@@ -113,6 +113,7 @@ export const techOptions: Record<DiagramNodeType, TechOption[]> = {
   text: [],
   rectangle: [],
   arrow: [],
+  image: [],
 };
 
 export function getTechOption(nodeType: DiagramNodeType, techId: string): TechOption | undefined {
