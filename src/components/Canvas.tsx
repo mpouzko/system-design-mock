@@ -98,7 +98,7 @@ export function Canvas() {
         deleteKeyCode="Delete"
         className="bg-white"
       >
-        <Background variant={BackgroundVariant.Dots} gap={15} size={1} color="#e2e8f0" />
+        <Background variant={BackgroundVariant.Lines} gap={20} size={0.5} color="rgba(0,0,0,0.06)" />
         <Controls className="!bg-white !border-gray-200 !shadow-sm" />
         <MiniMap
           className="!bg-gray-50 !border-gray-200"
