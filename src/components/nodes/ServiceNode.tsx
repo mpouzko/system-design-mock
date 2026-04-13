@@ -2,6 +2,7 @@ import { Handle, Position, type NodeProps } from '@xyflow/react';
 import type { DiagramNode } from '../../types';
 import { useDiagramStore } from '../../store/diagramStore';
 import { CogButton } from '../CogButton';
+import { TechButton } from '../TechButton';
 import { useState, useRef, useEffect } from 'react';
 
 export function ServiceNode({ id, data, selected }: NodeProps<DiagramNode>) {
@@ -21,6 +22,7 @@ export function ServiceNode({ id, data, selected }: NodeProps<DiagramNode>) {
     >
       <Handle type="source" id="top" position={Position.Top} className="!bg-blue-400 !w-4 !h-4" />
       <CogButton nodeId={id} data={data} />
+      <TechButton nodeId={id} data={data} nodeType="service" />
       <Handle type="source" id="left" position={Position.Left} className="!bg-blue-400 !w-4 !h-4" />
 
       {editing ? (

@@ -2,6 +2,7 @@ import { Handle, Position, type NodeProps } from '@xyflow/react';
 import type { DiagramNode } from '../../types';
 import { useDiagramStore } from '../../store/diagramStore';
 import { CogButton } from '../CogButton';
+import { TechButton } from '../TechButton';
 import { useState, useRef, useEffect } from 'react';
 
 export function DatabaseNode({ id, data, selected }: NodeProps<DiagramNode>) {
@@ -20,6 +21,7 @@ export function DatabaseNode({ id, data, selected }: NodeProps<DiagramNode>) {
     >
       <Handle type="source" id="top" position={Position.Top} className="!bg-green-500 !w-4 !h-4 !top-1" />
       <CogButton nodeId={id} data={data} />
+      <TechButton nodeId={id} data={data} nodeType="database" />
       <Handle type="source" id="left" position={Position.Left} className="!bg-green-500 !w-4 !h-4" />
 
       <svg viewBox="0 0 120 80" className="w-full h-auto" xmlns="http://www.w3.org/2000/svg">

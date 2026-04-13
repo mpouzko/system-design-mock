@@ -15,6 +15,8 @@ export type DiagramNodeData = {
   label: string;
   configText?: string;
   configEntries?: ConfigEntry[];
+  techId?: string;
+  techCustom?: string;
 };
 
 export type DiagramNode = Node<DiagramNodeData, DiagramNodeType>;

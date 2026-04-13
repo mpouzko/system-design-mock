@@ -26,6 +26,7 @@ type DiagramState = {
   updateNodeLabel: (nodeId: string, label: string) => void;
   updateEdgeLabel: (edgeId: string, label: string) => void;
   updateNodeConfig: (nodeId: string, configText: string, configEntries: ConfigEntry[]) => void;
+  updateNodeTech: (nodeId: string, techId: string, techCustom?: string) => void;
   deleteSelected: () => void;
 
   setDiagramName: (name: string) => void;
@@ -89,6 +90,14 @@ export const useDiagramStore = create<DiagramState>((set, get) => ({
     set({
       nodes: get().nodes.map((n) =>
         n.id === nodeId ? { ...n, data: { ...n.data, configText, configEntries } } : n
+      ),
+    });
+  },
+
+  updateNodeTech: (nodeId, techId, techCustom) => {
+    set({
+      nodes: get().nodes.map((n) =>
+        n.id === nodeId ? { ...n, data: { ...n.data, techId, techCustom } } : n
       ),
     });
   },
