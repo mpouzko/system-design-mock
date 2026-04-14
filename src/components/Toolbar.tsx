@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { useDiagramStore } from '../store/diagramStore';
-import { exportPng, exportSvg } from '../utils/exportDiagram';
+import { exportPng, exportSvg, exportJson } from '../utils/exportDiagram';
+import { encodeShareUrl } from '../utils/shareUrl';
 
 export function Toolbar() {
   const {
@@ -12,12 +13,15 @@ export function Toolbar() {
     deleteDiagram,
     savedDiagrams,
     diagramId,
+    nodes,
+    edges,
     refreshSavedList,
   } = useDiagramStore();
 
   const [editingName, setEditingName] = useState(false);
   const [showLoad, setShowLoad] = useState(false);
   const [showExport, setShowExport] = useState(false);
+  const [showCopied, setShowCopied] = useState(false);
   const nameRef = useRef<HTMLInputElement>(null);
   const loadRef = useRef<HTMLDivElement>(null);
   const exportRef = useRef<HTMLDivElement>(null);
@@ -74,6 +78,25 @@ export function Toolbar() {
       >
         Save
       </button>
+
+      <div className="relative">
+        <button
+          className="text-xs px-3 py-1.5 rounded bg-green-500 hover:bg-green-600 text-white font-medium"
+          onClick={() => {
+            const url = encodeShareUrl(diagramName, nodes, edges);
+            navigator.clipboard.writeText(url);
+            setShowCopied(true);
+            setTimeout(() => setShowCopied(false), 2000);
+          }}
+        >
+          Share
+        </button>
+        {showCopied && (
+          <div className="absolute left-1/2 -translate-x-1/2 top-full mt-1 px-2 py-1 text-xs bg-gray-800 text-white rounded whitespace-nowrap z-50">
+            Link copied!
+          </div>
+        )}
+      </div>
 
       {/* Load dropdown */}
       <div ref={loadRef} className="relative">
@@ -134,6 +157,12 @@ export function Toolbar() {
               onClick={() => { exportSvg(diagramName); setShowExport(false); }}
             >
               Export SVG
+            </button>
+            <button
+              className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+              onClick={() => { exportJson(diagramName, nodes, edges); setShowExport(false); }}
+            >
+              Export JSON
             </button>
           </div>
         )}

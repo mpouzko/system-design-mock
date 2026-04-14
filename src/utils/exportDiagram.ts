@@ -1,4 +1,5 @@
 import { toPng, toSvg } from 'html-to-image';
+import type { DiagramNode, DiagramEdge } from '../types';
 
 function getFlowElement(): HTMLElement {
   const el = document.querySelector('.react-flow') as HTMLElement;
@@ -27,6 +28,14 @@ export async function exportPng(name: string) {
   } finally {
     el.classList.remove('export-mode');
   }
+}
+
+export function exportJson(name: string, nodes: DiagramNode[], edges: DiagramEdge[]) {
+  const json = JSON.stringify({ name, nodes, edges }, null, 2);
+  const blob = new Blob([json], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  download(url, `${name}.json`);
+  URL.revokeObjectURL(url);
 }
 
 export async function exportSvg(name: string) {

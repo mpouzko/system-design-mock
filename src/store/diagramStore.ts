@@ -9,7 +9,8 @@ import {
   type Connection,
 } from '@xyflow/react';
 import type { DiagramNode, DiagramEdge, Diagram, ConfigEntry, NodeChild } from '../types';
-import { saveDiagram, loadDiagram, listDiagrams, deleteDiagram as removeDiagram } from '../utils/storage';
+import { saveDiagram, loadDiagram, listDiagrams, deleteDiagram as removeDiagram, autoSave, loadAutoSave } from '../utils/storage';
+import { decodeShareUrl } from '../utils/shareUrl';
 
 type DiagramState = {
   nodes: DiagramNode[];
@@ -46,11 +47,21 @@ function generateId() {
   return `diagram_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
 }
 
+// Shared URL takes priority over auto-save
+const shared = decodeShareUrl(window.location.hash);
+if (shared) {
+  // Clear the hash so refreshing doesn't re-import
+  history.replaceState(null, '', window.location.pathname + window.location.search);
+}
+const restored = shared
+  ? { nodes: shared.nodes, edges: shared.edges, diagramId: null, diagramName: shared.name }
+  : loadAutoSave();
+
 export const useDiagramStore = create<DiagramState>((set, get) => ({
-  nodes: [],
-  edges: [],
-  diagramId: generateId(),
-  diagramName: 'Untitled Diagram',
+  nodes: (restored?.nodes as DiagramNode[]) ?? [],
+  edges: (restored?.edges as DiagramEdge[]) ?? [],
+  diagramId: restored?.diagramId || generateId(),
+  diagramName: restored?.diagramName ?? 'Untitled Diagram',
   savedDiagrams: listDiagrams(),
 
   onNodesChange: (changes) => {
@@ -270,3 +281,17 @@ export const useDiagramStore = create<DiagramState>((set, get) => ({
     set({ savedDiagrams: listDiagrams() });
   },
 }));
+
+// Debounced auto-save: persist current diagram to localStorage on every change
+let autoSaveTimer: ReturnType<typeof setTimeout>;
+useDiagramStore.subscribe((state) => {
+  clearTimeout(autoSaveTimer);
+  autoSaveTimer = setTimeout(() => {
+    autoSave({
+      nodes: state.nodes,
+      edges: state.edges,
+      diagramId: state.diagramId,
+      diagramName: state.diagramName,
+    });
+  }, 500);
+});

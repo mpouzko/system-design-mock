@@ -43,3 +43,25 @@ export function deleteDiagram(id: string) {
   delete all[id];
   setAll(all);
 }
+
+const AUTOSAVE_KEY = 'diagram_builder_autosave';
+
+export function autoSave(state: { nodes: unknown[]; edges: unknown[]; diagramId: string; diagramName: string }) {
+  try {
+    localStorage.setItem(AUTOSAVE_KEY, JSON.stringify({
+      nodes: state.nodes,
+      edges: state.edges,
+      diagramId: state.diagramId,
+      diagramName: state.diagramName,
+    }));
+  } catch { /* quota exceeded — ignore */ }
+}
+
+export function loadAutoSave(): { nodes: unknown[]; edges: unknown[]; diagramId: string; diagramName: string } | null {
+  try {
+    const raw = localStorage.getItem(AUTOSAVE_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+}
