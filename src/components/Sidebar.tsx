@@ -11,6 +11,14 @@ const commonItems: NodeItem[] = [
 
 const appStackItems: NodeItem[] = [
   { type: 'engine', label: 'Engine', icon: '⬡', color: 'border-amber-300 bg-amber-50' },
+  { type: 'bundler', label: 'Bundler', icon: '📦', color: 'border-pink-300 bg-pink-50' },
+  { type: 'uiFramework', label: 'UI Framework', icon: '⚛', color: 'border-cyan-300 bg-cyan-50' },
+  { type: 'serverFramework', label: 'Server Framework', icon: '⚙', color: 'border-emerald-300 bg-emerald-50' },
+  { type: 'stateManagement', label: 'State Mgmt', icon: '↻', color: 'border-orange-300 bg-orange-50' },
+  { type: 'uiToolkit', label: 'UI Toolkit', icon: '◧', color: 'border-indigo-300 bg-indigo-50' },
+  { type: 'css', label: 'CSS', icon: '#', color: 'border-rose-300 bg-rose-50' },
+  { type: 'orm', label: 'ORM', icon: '⇄', color: 'border-violet-300 bg-violet-50' },
+  { type: 'otherSoftware', label: 'Other Software', icon: '…', color: 'border-gray-300 bg-gray-50' },
 ];
 
 const serviceItems: NodeItem[] = [

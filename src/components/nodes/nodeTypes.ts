@@ -13,6 +13,14 @@ import { ArrowNode } from './ArrowNode';
 import { ImageNode } from './ImageNode';
 import { EngineNode } from './EngineNode';
 import { AINode } from './AINode';
+import { BundlerNode } from './BundlerNode';
+import { UIFrameworkNode } from './UIFrameworkNode';
+import { ServerFrameworkNode } from './ServerFrameworkNode';
+import { StateManagementNode } from './StateManagementNode';
+import { UIToolkitNode } from './UIToolkitNode';
+import { CSSNode } from './CSSNode';
+import { ORMNode } from './ORMNode';
+import { OtherSoftwareNode } from './OtherSoftwareNode';
 
 export const nodeTypes: NodeTypes = {
   service: ServiceNode,
@@ -29,4 +37,12 @@ export const nodeTypes: NodeTypes = {
   image: ImageNode,
   engine: EngineNode,
   ai: AINode,
+  bundler: BundlerNode,
+  uiFramework: UIFrameworkNode,
+  serverFramework: ServerFrameworkNode,
+  stateManagement: StateManagementNode,
+  uiToolkit: UIToolkitNode,
+  css: CSSNode,
+  orm: ORMNode,
+  otherSoftware: OtherSoftwareNode,
 };

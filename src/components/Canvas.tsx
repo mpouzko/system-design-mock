@@ -25,6 +25,14 @@ import { config as rectangleConfig } from './nodes/RectangleNode';
 import { config as imageConfig } from './nodes/ImageNode';
 import { config as engineConfig } from './nodes/EngineNode';
 import { config as aiConfig } from './nodes/AINode';
+import { config as bundlerConfig } from './nodes/BundlerNode';
+import { config as uiFrameworkConfig } from './nodes/UIFrameworkNode';
+import { config as serverFrameworkConfig } from './nodes/ServerFrameworkNode';
+import { config as stateManagementConfig } from './nodes/StateManagementNode';
+import { config as uiToolkitConfig } from './nodes/UIToolkitNode';
+import { config as cssConfig } from './nodes/CSSNode';
+import { config as ormConfig } from './nodes/ORMNode';
+import { config as otherSoftwareConfig } from './nodes/OtherSoftwareNode';
 
 const nodeConfigs: Partial<Record<DiagramNodeType, { title: string; size: { minWidth: number; minHeight: number } }>> = {
   service: serviceConfig,
@@ -40,6 +48,14 @@ const nodeConfigs: Partial<Record<DiagramNodeType, { title: string; size: { minW
   image: imageConfig,
   engine: engineConfig,
   ai: aiConfig,
+  bundler: bundlerConfig,
+  uiFramework: uiFrameworkConfig,
+  serverFramework: serverFrameworkConfig,
+  stateManagement: stateManagementConfig,
+  uiToolkit: uiToolkitConfig,
+  css: cssConfig,
+  orm: ormConfig,
+  otherSoftware: otherSoftwareConfig,
 };
 
 const edgeTypes = { custom: CustomEdge };

@@ -14,7 +14,15 @@ export type DiagramNodeType =
   | 'arrow'
   | 'image'
   | 'engine'
-  | 'ai';
+  | 'ai'
+  | 'bundler'
+  | 'uiFramework'
+  | 'serverFramework'
+  | 'stateManagement'
+  | 'uiToolkit'
+  | 'css'
+  | 'orm'
+  | 'otherSoftware';
 
 export type ConfigEntry = { key: string; value: string; children?: ConfigEntry[] };
 export type NodeChild = { id: string; name: string; config?: string };

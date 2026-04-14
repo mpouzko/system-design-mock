@@ -129,6 +129,100 @@ const aiOptions: TechOption[] = [
   { id: 'stability', name: 'Stability AI', icon: <LetterIcon letter="St" bg="#7C3AED" /> },
 ];
 
+const bundlerOptions: TechOption[] = [
+  { id: 'webpack', name: 'Webpack', icon: <LetterIcon letter="Wp" bg="#8DD6F9" fg="#1a1a1a" /> },
+  { id: 'vite', name: 'Vite', icon: <LetterIcon letter="Vi" bg="#646CFF" /> },
+  { id: 'parcel', name: 'Parcel', icon: <LetterIcon letter="Pc" bg="#E6A520" /> },
+  { id: 'rollup', name: 'Rollup', icon: <CircleIcon letter="Ru" bg="#EC4A3F" /> },
+  { id: 'esbuild', name: 'esbuild', icon: <LetterIcon letter="Es" bg="#FFCF00" fg="#000" /> },
+  { id: 'turbopack', name: 'Turbopack', icon: <LetterIcon letter="Tp" bg="#EF4444" /> },
+  { id: 'swc', name: 'SWC', icon: <LetterIcon letter="SW" bg="#F8C457" fg="#000" /> },
+  { id: 'rspack', name: 'Rspack', icon: <LetterIcon letter="Rs" bg="#FF6633" /> },
+  { id: 'gulp', name: 'Gulp', icon: <LetterIcon letter="Gp" bg="#CF4647" /> },
+  { id: 'nx', name: 'Nx', icon: <LetterIcon letter="Nx" bg="#143055" /> },
+];
+
+const uiFrameworkOptions: TechOption[] = [
+  { id: 'react', name: 'React', icon: <CircleIcon letter="Re" bg="#61DAFB" fg="#000" /> },
+  { id: 'angular', name: 'Angular', icon: <LetterIcon letter="Ng" bg="#DD0031" /> },
+  { id: 'vue', name: 'Vue', icon: <LetterIcon letter="Vu" bg="#4FC08D" /> },
+  { id: 'svelte', name: 'Svelte', icon: <LetterIcon letter="Sv" bg="#FF3E00" /> },
+  { id: 'solid', name: 'Solid', icon: <LetterIcon letter="So" bg="#2C4F7C" /> },
+  { id: 'preact', name: 'Preact', icon: <CircleIcon letter="Pr" bg="#673AB8" /> },
+  { id: 'htmx', name: 'HTMX', icon: <LetterIcon letter="Hx" bg="#3366CC" /> },
+  { id: 'lit', name: 'Lit', icon: <LetterIcon letter="Lt" bg="#324FFF" /> },
+  { id: 'qwik', name: 'Qwik', icon: <LetterIcon letter="Qk" bg="#18B6F6" /> },
+  { id: 'ember', name: 'Ember', icon: <LetterIcon letter="Em" bg="#E04E39" /> },
+];
+
+const serverFrameworkOptions: TechOption[] = [
+  { id: 'nextjs', name: 'Next.js', icon: <LetterIcon letter="Nx" bg="#000000" /> },
+  { id: 'nestjs', name: 'NestJS', icon: <LetterIcon letter="Ns" bg="#E0234E" /> },
+  { id: 'nuxt', name: 'Nuxt', icon: <LetterIcon letter="Nu" bg="#00DC82" fg="#000" /> },
+  { id: 'express', name: 'Express', icon: <LetterIcon letter="Ex" bg="#333333" /> },
+  { id: 'fastify', name: 'Fastify', icon: <LetterIcon letter="Fy" bg="#000000" /> },
+  { id: 'adonis', name: 'AdonisJS', icon: <LetterIcon letter="Ad" bg="#5A45FF" /> },
+  { id: 'remix', name: 'Remix', icon: <LetterIcon letter="Rm" bg="#121212" /> },
+  { id: 'astro', name: 'Astro', icon: <LetterIcon letter="As" bg="#BC52EE" /> },
+  { id: 'hono', name: 'Hono', icon: <CircleIcon letter="Ho" bg="#FF5B11" /> },
+  { id: 'koa', name: 'Koa', icon: <CircleIcon letter="Ko" bg="#33333D" /> },
+  { id: 'sveltekit', name: 'SvelteKit', icon: <LetterIcon letter="SK" bg="#FF3E00" /> },
+];
+
+const stateManagementOptions: TechOption[] = [
+  { id: 'redux', name: 'Redux', icon: <LetterIcon letter="Rx" bg="#764ABC" /> },
+  { id: 'mobx', name: 'MobX', icon: <LetterIcon letter="Mx" bg="#FF9955" /> },
+  { id: 'zustand', name: 'Zustand', icon: <LetterIcon letter="Zu" bg="#453F39" /> },
+  { id: 'ngrx', name: 'NgRx', icon: <LetterIcon letter="NR" bg="#BA2BD2" /> },
+  { id: 'pinia', name: 'Pinia', icon: <LetterIcon letter="Pi" bg="#FFD859" fg="#000" /> },
+  { id: 'jotai', name: 'Jotai', icon: <CircleIcon letter="Jo" bg="#000000" /> },
+  { id: 'recoil', name: 'Recoil', icon: <LetterIcon letter="Rc" bg="#3578E5" /> },
+  { id: 'xstate', name: 'XState', icon: <LetterIcon letter="Xs" bg="#2C3E50" /> },
+  { id: 'tanstack', name: 'TanStack Query', icon: <LetterIcon letter="TQ" bg="#FF4154" /> },
+  { id: 'signals', name: 'Signals', icon: <CircleIcon letter="Sg" bg="#4FC08D" /> },
+];
+
+const uiToolkitOptions: TechOption[] = [
+  { id: 'tailwind', name: 'Tailwind CSS', icon: <LetterIcon letter="Tw" bg="#06B6D4" /> },
+  { id: 'mui', name: 'Material UI', icon: <LetterIcon letter="MU" bg="#007FFF" /> },
+  { id: 'antd', name: 'Ant Design', icon: <LetterIcon letter="An" bg="#1677FF" /> },
+  { id: 'bootstrap', name: 'Bootstrap', icon: <LetterIcon letter="Bs" bg="#7952B3" /> },
+  { id: 'chakra', name: 'Chakra UI', icon: <CircleIcon letter="Ch" bg="#319795" /> },
+  { id: 'shadcn', name: 'shadcn/ui', icon: <LetterIcon letter="Sh" bg="#000000" /> },
+  { id: 'radix', name: 'Radix', icon: <LetterIcon letter="Rd" bg="#1B1B1F" /> },
+  { id: 'headless', name: 'Headless UI', icon: <LetterIcon letter="Hl" bg="#66E3FF" fg="#000" /> },
+  { id: 'primeng', name: 'PrimeNG', icon: <LetterIcon letter="Pg" bg="#DD0031" /> },
+  { id: 'vuetify', name: 'Vuetify', icon: <LetterIcon letter="Vy" bg="#1867C0" /> },
+];
+
+const cssOptions: TechOption[] = [
+  { id: 'sass', name: 'Sass', icon: <LetterIcon letter="Sa" bg="#CC6699" /> },
+  { id: 'scss', name: 'SCSS', icon: <LetterIcon letter="Sc" bg="#CF649A" /> },
+  { id: 'less', name: 'Less', icon: <LetterIcon letter="Le" bg="#1D365D" /> },
+  { id: 'postcss', name: 'PostCSS', icon: <LetterIcon letter="Pc" bg="#DD3A0A" /> },
+  { id: 'stylus', name: 'Stylus', icon: <LetterIcon letter="St" bg="#333333" /> },
+  { id: 'css-modules', name: 'CSS Modules', icon: <LetterIcon letter="CM" bg="#000000" /> },
+  { id: 'styled', name: 'Styled Comp.', icon: <LetterIcon letter="SC" bg="#DB7093" /> },
+  { id: 'emotion', name: 'Emotion', icon: <CircleIcon letter="Em" bg="#D36AC2" /> },
+  { id: 'vanilla-extract', name: 'Vanilla Extract', icon: <LetterIcon letter="VE" bg="#99F5FF" fg="#000" /> },
+  { id: 'linaria', name: 'Linaria', icon: <LetterIcon letter="Li" bg="#DE2D68" /> },
+];
+
+const ormOptions: TechOption[] = [
+  { id: 'prisma', name: 'Prisma', icon: <LetterIcon letter="Pr" bg="#2D3748" /> },
+  { id: 'typeorm', name: 'TypeORM', icon: <LetterIcon letter="TO" bg="#FE0902" /> },
+  { id: 'sequelize', name: 'Sequelize', icon: <LetterIcon letter="Sq" bg="#52B0E7" /> },
+  { id: 'mongoose', name: 'Mongoose', icon: <LetterIcon letter="Mg" bg="#880000" /> },
+  { id: 'mikroorm', name: 'MikroORM', icon: <LetterIcon letter="Mi" bg="#0F2B46" /> },
+  { id: 'drizzle', name: 'Drizzle', icon: <LetterIcon letter="Dr" bg="#C5F74F" fg="#000" /> },
+  { id: 'knex', name: 'Knex.js', icon: <LetterIcon letter="Kx" bg="#E16426" /> },
+  { id: 'hibernate', name: 'Hibernate', icon: <LetterIcon letter="Hb" bg="#59666C" /> },
+  { id: 'sqlalchemy', name: 'SQLAlchemy', icon: <LetterIcon letter="SA" bg="#D71F00" /> },
+  { id: 'django-orm', name: 'Django ORM', icon: <LetterIcon letter="Dj" bg="#092E20" /> },
+  { id: 'gorm', name: 'GORM', icon: <LetterIcon letter="Gm" bg="#00ADD8" /> },
+  { id: 'objection', name: 'Objection.js', icon: <LetterIcon letter="Ob" bg="#FF6F00" /> },
+];
+
 export const techOptions: Record<DiagramNodeType, TechOption[]> = {
   service: serviceOptions,
   database: databaseOptions,
@@ -140,6 +234,14 @@ export const techOptions: Record<DiagramNodeType, TechOption[]> = {
   environment: environmentOptions,
   engine: engineOptions,
   ai: aiOptions,
+  bundler: bundlerOptions,
+  uiFramework: uiFrameworkOptions,
+  serverFramework: serverFrameworkOptions,
+  stateManagement: stateManagementOptions,
+  uiToolkit: uiToolkitOptions,
+  css: cssOptions,
+  orm: ormOptions,
+  otherSoftware: [],
   text: [],
   rectangle: [],
   arrow: [],
