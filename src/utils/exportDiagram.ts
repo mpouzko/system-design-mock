@@ -17,17 +17,27 @@ function download(dataUrl: string, filename: string) {
 
 export async function exportPng(name: string) {
   const el = getFlowElement();
-  const dataUrl = await toPng(el, {
-    backgroundColor: '#ffffff',
-    quality: 1,
-  });
-  download(dataUrl, `${name}.png`);
+  el.classList.add('export-mode');
+  try {
+    const dataUrl = await toPng(el, {
+      backgroundColor: '#ffffff',
+      quality: 1,
+    });
+    download(dataUrl, `${name}.png`);
+  } finally {
+    el.classList.remove('export-mode');
+  }
 }
 
 export async function exportSvg(name: string) {
   const el = getFlowElement();
-  const dataUrl = await toSvg(el, {
-    backgroundColor: '#ffffff',
-  });
-  download(dataUrl, `${name}.svg`);
+  el.classList.add('export-mode');
+  try {
+    const dataUrl = await toSvg(el, {
+      backgroundColor: '#ffffff',
+    });
+    download(dataUrl, `${name}.svg`);
+  } finally {
+    el.classList.remove('export-mode');
+  }
 }

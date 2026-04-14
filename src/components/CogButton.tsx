@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 import { ConfigPopup } from './ConfigPopup';
 import { ConfigTooltip } from './ConfigTooltip';
+import { ConfigAnnotation } from './ConfigAnnotation';
 import type { DiagramNodeData } from '../types';
 
 export const cogButtonConfig = {
@@ -56,6 +57,7 @@ export function CogButton({ nodeId, data }: Props) {
           onClose={() => setOpen(false)}
         />
       )}
+      <ConfigAnnotation data={data} />
     </>
   );
 }
