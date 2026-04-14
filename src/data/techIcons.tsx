@@ -101,6 +101,19 @@ const environmentOptions: TechOption[] = [
   { id: 'podman', name: 'Podman', icon: <CircleIcon letter="Pm" bg="#892CA0" /> },
 ];
 
+const engineOptions: TechOption[] = [
+  { id: 'nodejs', name: 'Node.js', icon: <LetterIcon letter="Nd" bg="#339933" /> },
+  { id: 'deno', name: 'Deno', icon: <LetterIcon letter="Dn" bg="#000000" /> },
+  { id: 'bun', name: 'Bun', icon: <CircleIcon letter="Bn" bg="#fbf0df" fg="#000" /> },
+  { id: 'python', name: 'Python', icon: <LetterIcon letter="Py" bg="#3776AB" /> },
+  { id: 'go', name: 'Go', icon: <LetterIcon letter="Go" bg="#00ADD8" /> },
+  { id: 'java', name: 'Java', icon: <LetterIcon letter="Jv" bg="#ED8B00" /> },
+  { id: 'dotnet', name: '.NET', icon: <LetterIcon letter=".N" bg="#512BD4" /> },
+  { id: 'rust', name: 'Rust', icon: <LetterIcon letter="Rs" bg="#CE422B" /> },
+  { id: 'php', name: 'PHP', icon: <CircleIcon letter="Ph" bg="#777BB4" /> },
+  { id: 'ruby', name: 'Ruby', icon: <CircleIcon letter="Rb" bg="#CC342D" /> },
+];
+
 export const techOptions: Record<DiagramNodeType, TechOption[]> = {
   service: serviceOptions,
   database: databaseOptions,
@@ -110,6 +123,7 @@ export const techOptions: Record<DiagramNodeType, TechOption[]> = {
   cloud: cloudOptions,
   user: userOptions,
   environment: environmentOptions,
+  engine: engineOptions,
   text: [],
   rectangle: [],
   arrow: [],

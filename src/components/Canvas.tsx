@@ -23,6 +23,7 @@ import { config as environmentConfig } from './nodes/EnvironmentNode';
 import { config as textConfig } from './nodes/TextNode';
 import { config as rectangleConfig } from './nodes/RectangleNode';
 import { config as imageConfig } from './nodes/ImageNode';
+import { config as engineConfig } from './nodes/EngineNode';
 
 const nodeConfigs: Partial<Record<DiagramNodeType, { title: string; size: { minWidth: number; minHeight: number } }>> = {
   service: serviceConfig,
@@ -36,6 +37,7 @@ const nodeConfigs: Partial<Record<DiagramNodeType, { title: string; size: { minW
   text: textConfig,
   rectangle: rectangleConfig,
   image: imageConfig,
+  engine: engineConfig,
 };
 
 const edgeTypes = { custom: CustomEdge };

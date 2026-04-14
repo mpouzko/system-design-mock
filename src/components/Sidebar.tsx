@@ -9,6 +9,10 @@ const commonItems: NodeItem[] = [
   { type: 'rectangle', label: 'Rectangle', icon: '[]', color: 'border-gray-300 bg-gray-50' },
 ];
 
+const appStackItems: NodeItem[] = [
+  { type: 'engine', label: 'Engine', icon: '⬡', color: 'border-amber-300 bg-amber-50' },
+];
+
 const serviceItems: NodeItem[] = [
   { type: 'service', label: 'Service', icon: '[ ]', color: 'border-blue-300 bg-blue-50' },
   { type: 'database', label: 'Database', icon: '||', color: 'border-green-300 bg-green-50' },
@@ -53,6 +57,7 @@ export function Sidebar() {
       <div className="flex-1 overflow-y-auto p-3 space-y-4">
         <CategorySection title="Common" items={commonItems} />
         <CategorySection title="Services" items={serviceItems} />
+        <CategorySection title="App Stack" items={appStackItems} />
       </div>
       <div className="px-4 py-2 border-t border-gray-200 text-xs text-gray-400">
         Drag elements onto canvas

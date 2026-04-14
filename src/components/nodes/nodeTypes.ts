@@ -11,6 +11,7 @@ import { TextNode } from './TextNode';
 import { RectangleNode } from './RectangleNode';
 import { ArrowNode } from './ArrowNode';
 import { ImageNode } from './ImageNode';
+import { EngineNode } from './EngineNode';
 
 export const nodeTypes: NodeTypes = {
   service: ServiceNode,
@@ -25,4 +26,5 @@ export const nodeTypes: NodeTypes = {
   rectangle: RectangleNode,
   arrow: ArrowNode,
   image: ImageNode,
+  engine: EngineNode,
 };
