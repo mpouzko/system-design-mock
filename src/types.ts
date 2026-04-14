@@ -13,7 +13,8 @@ export type DiagramNodeType =
   | 'rectangle'
   | 'arrow'
   | 'image'
-  | 'engine';
+  | 'engine'
+  | 'ai';
 
 export type ConfigEntry = { key: string; value: string; children?: ConfigEntry[] };
 export type NodeChild = { id: string; name: string; config?: string };

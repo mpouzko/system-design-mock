@@ -114,6 +114,21 @@ const engineOptions: TechOption[] = [
   { id: 'ruby', name: 'Ruby', icon: <CircleIcon letter="Rb" bg="#CC342D" /> },
 ];
 
+const aiOptions: TechOption[] = [
+  { id: 'openai', name: 'OpenAI / GPT', icon: <CircleIcon letter="OA" bg="#412991" /> },
+  { id: 'claude', name: 'Claude', icon: <LetterIcon letter="Cl" bg="#D97757" /> },
+  { id: 'gemini', name: 'Gemini', icon: <CircleIcon letter="Gm" bg="#4285F4" /> },
+  { id: 'llama', name: 'Llama', icon: <LetterIcon letter="Ll" bg="#0467DF" /> },
+  { id: 'mistral', name: 'Mistral', icon: <LetterIcon letter="Ms" bg="#F7D046" fg="#000" /> },
+  { id: 'qwen', name: 'Qwen', icon: <LetterIcon letter="Qw" bg="#6F42C1" /> },
+  { id: 'deepseek', name: 'DeepSeek', icon: <LetterIcon letter="DS" bg="#4D6BFE" /> },
+  { id: 'codex', name: 'Codex', icon: <LetterIcon letter="Cx" bg="#10A37F" /> },
+  { id: 'cohere', name: 'Cohere', icon: <LetterIcon letter="Co" bg="#39594D" /> },
+  { id: 'huggingface', name: 'Hugging Face', icon: <LetterIcon letter="HF" bg="#FFD21E" fg="#000" /> },
+  { id: 'replicate', name: 'Replicate', icon: <LetterIcon letter="Rp" bg="#262626" /> },
+  { id: 'stability', name: 'Stability AI', icon: <LetterIcon letter="St" bg="#7C3AED" /> },
+];
+
 export const techOptions: Record<DiagramNodeType, TechOption[]> = {
   service: serviceOptions,
   database: databaseOptions,
@@ -124,6 +139,7 @@ export const techOptions: Record<DiagramNodeType, TechOption[]> = {
   user: userOptions,
   environment: environmentOptions,
   engine: engineOptions,
+  ai: aiOptions,
   text: [],
   rectangle: [],
   arrow: [],

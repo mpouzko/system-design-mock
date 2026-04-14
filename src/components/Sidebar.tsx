@@ -22,6 +22,7 @@ const serviceItems: NodeItem[] = [
   { type: 'user', label: 'User / Client', icon: '()', color: 'border-gray-300 bg-gray-50' },
   { type: 'cloud', label: 'Cloud / CDN', icon: '~~', color: 'border-sky-300 bg-sky-50' },
   { type: 'environment', label: 'Environment', icon: '[ ]', color: 'border-teal-300 bg-teal-50' },
+  { type: 'ai', label: 'AI / ML', icon: '✦', color: 'border-purple-300 bg-purple-50' },
 ];
 
 function onDragStart(event: DragEvent, nodeType: DiagramNodeType) {
