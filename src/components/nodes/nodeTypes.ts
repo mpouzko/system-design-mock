@@ -21,6 +21,7 @@ import { UIToolkitNode } from './UIToolkitNode';
 import { CSSNode } from './CSSNode';
 import { ORMNode } from './ORMNode';
 import { OtherSoftwareNode } from './OtherSoftwareNode';
+import { TestingNode } from './TestingNode';
 
 export const nodeTypes: NodeTypes = {
   service: ServiceNode,
@@ -45,4 +46,5 @@ export const nodeTypes: NodeTypes = {
   css: CSSNode,
   orm: ORMNode,
   otherSoftware: OtherSoftwareNode,
+  testing: TestingNode,
 };

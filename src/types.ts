@@ -22,7 +22,8 @@ export type DiagramNodeType =
   | 'uiToolkit'
   | 'css'
   | 'orm'
-  | 'otherSoftware';
+  | 'otherSoftware'
+  | 'testing';
 
 export type ConfigEntry = { key: string; value: string; children?: ConfigEntry[] };
 export type NodeChild = { id: string; name: string; config?: string };

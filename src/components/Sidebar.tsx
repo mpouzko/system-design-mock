@@ -18,6 +18,7 @@ const appStackItems: NodeItem[] = [
   { type: 'uiToolkit', label: 'UI Toolkit', icon: '◧', color: 'border-indigo-300 bg-indigo-50' },
   { type: 'css', label: 'CSS', icon: '#', color: 'border-rose-300 bg-rose-50' },
   { type: 'orm', label: 'ORM', icon: '⇄', color: 'border-violet-300 bg-violet-50' },
+  { type: 'testing', label: 'Testing', icon: '✓', color: 'border-green-300 bg-green-50' },
   { type: 'otherSoftware', label: 'Other Software', icon: '…', color: 'border-gray-300 bg-gray-50' },
 ];
 

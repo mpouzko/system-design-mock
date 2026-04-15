@@ -33,6 +33,7 @@ import { config as uiToolkitConfig } from './nodes/UIToolkitNode';
 import { config as cssConfig } from './nodes/CSSNode';
 import { config as ormConfig } from './nodes/ORMNode';
 import { config as otherSoftwareConfig } from './nodes/OtherSoftwareNode';
+import { config as testingConfig } from './nodes/TestingNode';
 
 const nodeConfigs: Partial<Record<DiagramNodeType, { title: string; size: { minWidth: number; minHeight: number } }>> = {
   service: serviceConfig,
@@ -56,6 +57,7 @@ const nodeConfigs: Partial<Record<DiagramNodeType, { title: string; size: { minW
   css: cssConfig,
   orm: ormConfig,
   otherSoftware: otherSoftwareConfig,
+  testing: testingConfig,
 };
 
 const edgeTypes = { custom: CustomEdge };

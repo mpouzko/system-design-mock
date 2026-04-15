@@ -223,6 +223,21 @@ const ormOptions: TechOption[] = [
   { id: 'objection', name: 'Objection.js', icon: <LetterIcon letter="Ob" bg="#FF6F00" /> },
 ];
 
+const testingOptions: TechOption[] = [
+  { id: 'jest', name: 'Jest', icon: <LetterIcon letter="Js" bg="#C21325" /> },
+  { id: 'vitest', name: 'Vitest', icon: <LetterIcon letter="Vt" bg="#6E9F18" /> },
+  { id: 'rtl', name: 'Testing Library', icon: <LetterIcon letter="TL" bg="#E33332" /> },
+  { id: 'cypress', name: 'Cypress', icon: <LetterIcon letter="Cy" bg="#17202C" /> },
+  { id: 'playwright', name: 'Playwright', icon: <LetterIcon letter="Pw" bg="#2EAD33" /> },
+  { id: 'mocha', name: 'Mocha', icon: <CircleIcon letter="Mo" bg="#8D6748" /> },
+  { id: 'storybook', name: 'Storybook', icon: <LetterIcon letter="Sb" bg="#FF4785" /> },
+  { id: 'selenium', name: 'Selenium', icon: <LetterIcon letter="Se" bg="#43B02A" /> },
+  { id: 'puppeteer', name: 'Puppeteer', icon: <LetterIcon letter="Pp" bg="#40B5A4" /> },
+  { id: 'karma', name: 'Karma', icon: <CircleIcon letter="Ka" bg="#56C5A0" /> },
+  { id: 'jasmine', name: 'Jasmine', icon: <CircleIcon letter="Ja" bg="#8A4182" /> },
+  { id: 'msw', name: 'MSW', icon: <LetterIcon letter="MW" bg="#FF6A33" /> },
+];
+
 export const techOptions: Record<DiagramNodeType, TechOption[]> = {
   service: serviceOptions,
   database: databaseOptions,
@@ -241,6 +256,7 @@ export const techOptions: Record<DiagramNodeType, TechOption[]> = {
   uiToolkit: uiToolkitOptions,
   css: cssOptions,
   orm: ormOptions,
+  testing: testingOptions,
   otherSoftware: [],
   text: [],
   rectangle: [],
