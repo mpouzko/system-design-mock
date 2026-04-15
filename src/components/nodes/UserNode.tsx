@@ -7,13 +7,14 @@ import { ChildrenList } from '../ChildrenList';
 import { TechButton } from '../TechButton';
 import { TechLabel } from '../TechLabel';
 import { useState, useRef, useEffect } from 'react';
+import { svgNodeClasses } from './nodeStyles';
 
 export const config = {
   title: 'User / Client',
   strokeColor: '#d1d5db',
   selectedStrokeColor: '#6b7280',
   strokeWidth: 1.5,
-  size: { minWidth: 80, minHeight: 40 },
+  size: { minWidth: 80, minHeight: 100 },
 };
 
 export function UserNode({ id, data, selected }: NodeProps<DiagramNode>) {
@@ -27,7 +28,7 @@ export function UserNode({ id, data, selected }: NodeProps<DiagramNode>) {
 
   return (
     <div
-      className={`flex flex-col items-center w-full h-full min-w-[80px] text-center ${selected ? 'drop-shadow-md' : 'drop-shadow-sm'}`}
+      className={svgNodeClasses(selected)}
       onDoubleClick={() => setEditing(true)}
     >
       <NodeResizer minWidth={config.size.minWidth} minHeight={config.size.minHeight} isVisible={!!selected} lineClassName="!border-gray-400" handleClassName="!bg-gray-400 !w-2 !h-2 !border-white" />

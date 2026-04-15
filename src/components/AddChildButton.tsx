@@ -15,7 +15,7 @@ export function AddChildButton({ nodeId }: Props) {
     <>
       <button
         ref={btnRef}
-        className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-5 h-5 flex items-center justify-center rounded-full
+        className="absolute -bottom-7 left-1/2 -translate-x-1/2 w-5 h-5 flex items-center justify-center rounded-full
           bg-white border border-gray-300 hover:border-blue-400 hover:bg-blue-50 transition-colors z-10 text-gray-400 hover:text-blue-500 text-sm leading-none"
         onClick={(e) => { e.stopPropagation(); setOpen(!open); }}
         title="Add child"

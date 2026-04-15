@@ -7,6 +7,7 @@ import { ChildrenList } from '../ChildrenList';
 import { TechButton } from '../TechButton';
 import { TechLabel } from '../TechLabel';
 import { useState, useRef, useEffect } from 'react';
+import { svgNodeClasses } from './nodeStyles';
 
 export const config = {
   title: 'UI Toolkit',
@@ -27,7 +28,7 @@ export function UIToolkitNode({ id, data, selected }: NodeProps<DiagramNode>) {
 
   return (
     <div
-      className={`relative w-full h-full text-center ${selected ? 'drop-shadow-md' : 'drop-shadow-sm'}`}
+      className={svgNodeClasses(selected)}
       onDoubleClick={() => setEditing(true)}
     >
       <NodeResizer minWidth={config.size.minWidth} minHeight={config.size.minHeight} isVisible={!!selected} lineClassName="!border-indigo-400" handleClassName="!bg-indigo-500 !w-2 !h-2 !border-white" />

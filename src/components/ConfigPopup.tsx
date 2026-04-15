@@ -126,6 +126,7 @@ export function ConfigPopup({ nodeId, data, anchorRef, onClose }: Props) {
   const [entries, setEntries] = useState<ConfigEntry[]>(data.configEntries ?? []);
   const popupRef = useRef<HTMLDivElement>(null);
   const [pos, setPos] = useState({ top: 0, left: 0 });
+  const [size, setSize] = useState({ w: 280, h: 0 }); // h=0 means auto
 
   useEffect(() => {
     if (anchorRef.current) {
@@ -153,11 +154,33 @@ export function ConfigPopup({ nodeId, data, anchorRef, onClose }: Props) {
     setEntries([...entries, { key: '', value: '' }]);
   }
 
+  const onResizeStart = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const startX = e.clientX;
+    const startY = e.clientY;
+    const startW = popupRef.current?.offsetWidth ?? size.w;
+    const startH = popupRef.current?.offsetHeight ?? 200;
+
+    function onMove(ev: MouseEvent) {
+      setSize({
+        w: Math.max(220, startW + ev.clientX - startX),
+        h: Math.max(150, startH + ev.clientY - startY),
+      });
+    }
+    function onUp() {
+      document.removeEventListener('mousemove', onMove);
+      document.removeEventListener('mouseup', onUp);
+    }
+    document.addEventListener('mousemove', onMove);
+    document.addEventListener('mouseup', onUp);
+  }, [size.w]);
+
   return createPortal(
     <div
       ref={popupRef}
-      className="fixed z-[9999] w-[280px] bg-white border border-gray-200 rounded-lg shadow-lg nodrag nopan overflow-hidden"
-      style={{ top: pos.top, left: Math.max(8, pos.left) }}
+      className="fixed z-[9999] bg-white border border-gray-200 rounded-lg shadow-lg nodrag nopan overflow-hidden flex flex-col"
+      style={{ top: pos.top, left: Math.max(8, pos.left), width: size.w, ...(size.h > 0 && { height: size.h }) }}
       onMouseDown={(e) => e.stopPropagation()}
     >
       {/* Tabs */}
@@ -180,10 +203,10 @@ export function ConfigPopup({ nodeId, data, anchorRef, onClose }: Props) {
         </button>
       </div>
 
-      <div className="p-3 max-h-60 overflow-y-auto">
+      <div className="p-3 flex-1 overflow-y-auto">
         {tab === 'text' ? (
           <textarea
-            className="w-full h-28 p-2 text-xs font-mono bg-gray-50 border border-gray-200 rounded resize-none outline-none focus:border-blue-300"
+            className="w-full h-full min-h-[7rem] p-2 text-xs font-mono bg-gray-50 border border-gray-200 rounded resize-none outline-none focus:border-blue-300"
             placeholder="Add notes, config, code..."
             value={text}
             onChange={(e) => setText(e.target.value)}
@@ -209,6 +232,16 @@ export function ConfigPopup({ nodeId, data, anchorRef, onClose }: Props) {
         >
           Done
         </button>
+      </div>
+
+      {/* Resize handle */}
+      <div
+        className="absolute bottom-0 right-0 w-4 h-4 cursor-nwse-resize"
+        onMouseDown={onResizeStart}
+      >
+        <svg viewBox="0 0 16 16" className="w-full h-full text-gray-300">
+          <path d="M14,14 L14,8 M14,14 L8,14 M14,14 L10,10" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+        </svg>
       </div>
     </div>,
     document.body

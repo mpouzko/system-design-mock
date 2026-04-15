@@ -7,6 +7,7 @@ import { ChildrenList } from '../ChildrenList';
 import { TechButton } from '../TechButton';
 import { TechLabel } from '../TechLabel';
 import { useState, useRef, useEffect } from 'react';
+import { svgNodeClasses } from './nodeStyles';
 
 export const config = {
   title: 'State Mgmt',
@@ -27,7 +28,7 @@ export function StateManagementNode({ id, data, selected }: NodeProps<DiagramNod
 
   return (
     <div
-      className={`relative w-full h-full text-center ${selected ? 'drop-shadow-md' : 'drop-shadow-sm'}`}
+      className={svgNodeClasses(selected)}
       onDoubleClick={() => setEditing(true)}
     >
       <NodeResizer minWidth={config.size.minWidth} minHeight={config.size.minHeight} isVisible={!!selected} lineClassName="!border-orange-400" handleClassName="!bg-orange-500 !w-2 !h-2 !border-white" />

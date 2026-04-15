@@ -7,13 +7,14 @@ import { ChildrenList } from '../ChildrenList';
 import { TechButton } from '../TechButton';
 import { TechLabel } from '../TechLabel';
 import { useState, useRef, useEffect } from 'react';
+import { boxNodeClasses } from './nodeStyles';
 
 export const config = {
   title: 'Cache',
   strokeColor: '#fca5a5',
   selectedStrokeColor: '#ef4444',
   strokeWidth: 1,
-  size: { minWidth: 120, minHeight: 50 },
+  size: { minWidth: 120, minHeight: 70 },
 };
 
 export function CacheNode({ id, data, selected }: NodeProps<DiagramNode>) {
@@ -28,8 +29,7 @@ export function CacheNode({ id, data, selected }: NodeProps<DiagramNode>) {
   return (
     <div
       style={{ borderColor: selected ? config.selectedStrokeColor : config.strokeColor, borderWidth: config.strokeWidth }}
-      className={`px-5 py-3 rounded-xl border border-dashed bg-white shadow-sm w-full h-full text-center
-        ${selected ? 'shadow-md' : ''}`}
+      className={`rounded-xl border-dashed ${boxNodeClasses(selected)}`}
       onDoubleClick={() => setEditing(true)}
     >
       <NodeResizer minWidth={config.size.minWidth} minHeight={config.size.minHeight} isVisible={!!selected} lineClassName="!border-red-400" handleClassName="!bg-red-400 !w-2 !h-2 !border-white" />

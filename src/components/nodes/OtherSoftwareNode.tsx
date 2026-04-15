@@ -5,6 +5,7 @@ import { CogButton } from '../CogButton';
 import { AddChildButton } from '../AddChildButton';
 import { ChildrenList } from '../ChildrenList';
 import { useState, useRef, useEffect } from 'react';
+import { svgNodeClasses } from './nodeStyles';
 
 export const config = {
   title: 'Other',
@@ -25,7 +26,7 @@ export function OtherSoftwareNode({ id, data, selected }: NodeProps<DiagramNode>
 
   return (
     <div
-      className={`relative w-full h-full text-center ${selected ? 'drop-shadow-md' : 'drop-shadow-sm'}`}
+      className={svgNodeClasses(selected)}
       onDoubleClick={() => setEditing(true)}
     >
       <NodeResizer minWidth={config.size.minWidth} minHeight={config.size.minHeight} isVisible={!!selected} lineClassName="!border-gray-400" handleClassName="!bg-gray-500 !w-2 !h-2 !border-white" />

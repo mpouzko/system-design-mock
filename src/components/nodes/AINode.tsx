@@ -7,13 +7,14 @@ import { ChildrenList } from '../ChildrenList';
 import { TechButton } from '../TechButton';
 import { TechLabel } from '../TechLabel';
 import { useState, useRef, useEffect } from 'react';
+import { boxNodeClasses } from './nodeStyles';
 
 export const config = {
   title: 'AI',
   strokeColor: '#c084fc',        // purple-400
   selectedStrokeColor: '#9333ea', // purple-600
   strokeWidth: 1.5,
-  size: { minWidth: 120, minHeight: 50 },
+  size: { minWidth: 120, minHeight: 80 },
 };
 
 export function AINode({ id, data, selected }: NodeProps<DiagramNode>) {
@@ -28,8 +29,7 @@ export function AINode({ id, data, selected }: NodeProps<DiagramNode>) {
   return (
     <div
       style={{ borderColor: selected ? config.selectedStrokeColor : config.strokeColor, borderWidth: config.strokeWidth }}
-      className={`px-5 py-3 rounded-xl border bg-white shadow-sm w-full h-full text-center
-        ${selected ? 'shadow-md' : ''}`}
+      className={`rounded-xl ${boxNodeClasses(selected)}`}
       onDoubleClick={() => setEditing(true)}
     >
       <NodeResizer minWidth={config.size.minWidth} minHeight={config.size.minHeight} isVisible={!!selected} lineClassName="!border-purple-400" handleClassName="!bg-purple-500 !w-2 !h-2 !border-white" />

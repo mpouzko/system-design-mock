@@ -7,6 +7,7 @@ import { ChildrenList } from '../ChildrenList';
 import { TechButton } from '../TechButton';
 import { TechLabel } from '../TechLabel';
 import { useState, useRef, useEffect } from 'react';
+import { boxNodeClasses } from './nodeStyles';
 
 export const config = {
   title: 'Environment',
@@ -28,7 +29,7 @@ export function EnvironmentNode({ id, data, selected }: NodeProps<DiagramNode>) 
   return (
     <div
       style={{ borderColor: selected ? config.selectedStrokeColor : config.strokeColor, borderWidth: config.strokeWidth }}
-      className={`w-full h-full rounded-xl border border-dashed bg-teal-50/40 relative`}
+      className={`rounded-xl border border-dashed bg-teal-50/40 relative ${boxNodeClasses(selected)}`}
     >
       <NodeResizer minWidth={config.size.minWidth} minHeight={config.size.minHeight} isVisible={!!selected} lineClassName="!border-teal-400" handleClassName="!bg-teal-400 !w-2.5 !h-2.5 !border-white" />
       <Handle type="source" id="top" position={Position.Top} className="!bg-teal-400 !w-4 !h-4" />

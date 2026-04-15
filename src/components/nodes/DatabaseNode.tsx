@@ -7,13 +7,14 @@ import { ChildrenList } from '../ChildrenList';
 import { TechButton } from '../TechButton';
 import { TechLabel } from '../TechLabel';
 import { useState, useRef, useEffect } from 'react';
+import { svgNodeClasses } from './nodeStyles';
 
 export const config = {
   title: 'Database',
   strokeColor: '#86efac',
   selectedStrokeColor: '#22c55e',
   strokeWidth: 1.5,
-  size: { minWidth: 100, minHeight: 60 },
+  size: { minWidth: 120, minHeight: 80 },
 };
 
 export function DatabaseNode({ id, data, selected }: NodeProps<DiagramNode>) {
@@ -27,7 +28,7 @@ export function DatabaseNode({ id, data, selected }: NodeProps<DiagramNode>) {
 
   return (
     <div
-      className={`relative w-full h-full min-w-[80px] text-center ${selected ? 'drop-shadow-md' : 'drop-shadow-sm'}`}
+      className={svgNodeClasses(selected)}
       onDoubleClick={() => setEditing(true)}
     >
       <NodeResizer minWidth={config.size.minWidth} minHeight={config.size.minHeight} isVisible={!!selected} lineClassName="!border-green-400" handleClassName="!bg-green-500 !w-2 !h-2 !border-white" />

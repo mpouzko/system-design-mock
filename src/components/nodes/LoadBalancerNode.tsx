@@ -7,6 +7,7 @@ import { ChildrenList } from '../ChildrenList';
 import { TechButton } from '../TechButton';
 import { TechLabel } from '../TechLabel';
 import { useState, useRef, useEffect } from 'react';
+import { svgNodeClasses } from './nodeStyles';
 
 export const config = {
   title: 'Load Balancer',
@@ -27,7 +28,7 @@ export function LoadBalancerNode({ id, data, selected }: NodeProps<DiagramNode>)
 
   return (
     <div
-      className={`relative w-full h-full min-w-[80px] text-center ${selected ? 'drop-shadow-md' : 'drop-shadow-sm'}`}
+      className={svgNodeClasses(selected)}
       onDoubleClick={() => setEditing(true)}
     >
       <NodeResizer minWidth={config.size.minWidth} minHeight={config.size.minHeight} isVisible={!!selected} lineClassName="!border-purple-400" handleClassName="!bg-purple-500 !w-2 !h-2 !border-white" />
