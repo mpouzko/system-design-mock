@@ -3,6 +3,6 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
-  base: '/system-design-mock/',
+  base: process.env.VITE_APP_BASE ?? '/system-design-mock/',
   plugins: [react(), tailwindcss()],
 })

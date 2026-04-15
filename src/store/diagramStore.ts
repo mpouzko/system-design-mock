@@ -11,6 +11,16 @@ import {
 import type { DiagramNode, DiagramEdge, Diagram, ConfigEntry, NodeChild } from '../types';
 import { saveDiagram, loadDiagram, listDiagrams, deleteDiagram as removeDiagram, autoSave, loadAutoSave } from '../utils/storage';
 import { decodeShareUrl } from '../utils/shareUrl';
+import { isCollabMode } from '../utils/firebase';
+import {
+  createRoomId,
+  getRoomUrl,
+  parseRoomFromHash,
+  createRoom as fbCreateRoom,
+  joinRoom as fbJoinRoom,
+  pushState as fbPushState,
+  leaveRoom as fbLeaveRoom,
+} from '../utils/collabSync';
 
 type DiagramState = {
   nodes: DiagramNode[];
@@ -41,6 +51,12 @@ type DiagramState = {
   newDiagram: () => void;
   deleteDiagram: (id: string) => void;
   refreshSavedList: () => void;
+
+  // Collab
+  roomId: string | null;
+  collabCreateRoom: () => Promise<string>;
+  collabJoinRoom: (roomId: string) => void;
+  collabLeaveRoom: () => void;
 };
 
 function generateId() {
@@ -49,6 +65,7 @@ function generateId() {
 
 // Shared URL takes priority over auto-save
 const shared = decodeShareUrl(window.location.hash);
+const initialRoomId = parseRoomFromHash(window.location.hash);
 if (shared) {
   // Clear the hash so refreshing doesn't re-import
   history.replaceState(null, '', window.location.pathname + window.location.search);
@@ -280,9 +297,49 @@ export const useDiagramStore = create<DiagramState>((set, get) => ({
   refreshSavedList: () => {
     set({ savedDiagrams: listDiagrams() });
   },
+
+  // Collab
+  roomId: initialRoomId,
+
+  collabCreateRoom: async () => {
+    const roomId = createRoomId();
+    const { diagramName, nodes, edges } = get();
+    await fbCreateRoom(roomId, diagramName, nodes, edges);
+    set({ roomId });
+    history.replaceState(null, '', `${window.location.pathname}${window.location.search}#room=${roomId}`);
+    fbJoinRoom(roomId, (remote) => {
+      markRemote();
+      set({ nodes: remote.nodes as DiagramNode[], edges: remote.edges as DiagramEdge[], diagramName: remote.name });
+    });
+    return getRoomUrl(roomId);
+  },
+
+  collabJoinRoom: (roomId) => {
+    fbLeaveRoom();
+    set({ roomId });
+    history.replaceState(null, '', `${window.location.pathname}${window.location.search}#room=${roomId}`);
+    fbJoinRoom(roomId, (remote) => {
+      markRemote();
+      set({ nodes: remote.nodes as DiagramNode[], edges: remote.edges as DiagramEdge[], diagramName: remote.name });
+    });
+  },
+
+  collabLeaveRoom: () => {
+    fbLeaveRoom();
+    set({ roomId: null });
+    history.replaceState(null, '', window.location.pathname + window.location.search);
+  },
 }));
 
-// Debounced auto-save: persist current diagram to localStorage on every change
+// Flag to suppress Firestore push after receiving remote data.
+// Uses a timestamp: any state change within 1s of a remote update is considered remote.
+let remoteUpdateUntil = 0;
+
+function markRemote() {
+  remoteUpdateUntil = Date.now() + 1000;
+}
+
+// Debounced auto-save + collab push on every change
 let autoSaveTimer: ReturnType<typeof setTimeout>;
 useDiagramStore.subscribe((state) => {
   clearTimeout(autoSaveTimer);
@@ -293,5 +350,14 @@ useDiagramStore.subscribe((state) => {
       diagramId: state.diagramId,
       diagramName: state.diagramName,
     });
+    // Push to Firestore only for local changes
+    if (state.roomId && Date.now() > remoteUpdateUntil) {
+      fbPushState(state.roomId, state.diagramName, state.nodes, state.edges);
+    }
   }, 500);
 });
+
+// Auto-join room if URL has #room=...
+if (initialRoomId && isCollabMode) {
+  useDiagramStore.getState().collabJoinRoom(initialRoomId);
+}

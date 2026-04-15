@@ -5,12 +5,15 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:collab": "VITE_COLLAB=1 vite",
     "build": "vite build",
+    "build:collab": "VITE_COLLAB=1 vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
     "@xyflow/react": "^12.10.2",
+    "firebase": "^10.14.1",
     "html-to-image": "^1.11.13",
     "lz-string": "^1.5.0",
     "react": "^19.2.4",
